@@ -10,9 +10,7 @@ then
   export EDITOR=vim
 else
   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-  export EDITOR=mvim
-  stty erase ˆH
-  alias m=mvim
+  export EDITOR=vim
 fi
 
 source $ZSH/zshrc
