@@ -38,8 +38,27 @@ autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
 
+autocmd FileType python set omnifunc=pythoncompleteComplete
+autocmd FileType javascript set omnifunc=javascriptcompleteCompleteJS
+autocmd FileType html set omnifunc=htmlcompleteCompleteTags
+autocmd FileType css set omnifunc=csscompleteCompleteCSS
+autocmd FileType xml set omnifunc=xmlcompleteCompleteTags
+autocmd FileType php set omnifunc=phpcompleteCompletePHP
+autocmd FileType c set omnifunc=ccompleteComplete
+
+" Drupal ***************
+augroup drupal
+  autocmd BufRead,BufNewFile *.php set filetype=php
+  autocmd BufRead,BufNewFile *.module set filetype=php
+  autocmd BufRead,BufNewFile *.inc set filetype=php
+  autocmd BufRead,BufNewFile *.test set filetype=php
+augroup END
+
 let php_sql_query=1
 let php_htmlInStrings=1
+let php_parent_error_close = 1
+let php_parent_error_open = 1
+let php_folding = 1
 
 set completeopt=longest,menu
 set wildmode=list:longest,list:full
@@ -70,11 +89,20 @@ set ignorecase
 set hlsearch
 set incsearch
 
+" Code Folding *******************
+set foldclose=
+set foldmethod=indent
+set foldnestmax=10
+set foldlevel=0
+set fillchars=vert:\|,fold:\
+set foldminlines=2
+noremap <space> za
 
 " Editing ************************
 set backspace=indent,eol,start
 map <S-Enter> O<ESC>
 map <Enter> o<ESC>
+
 set fo-=r
 
 let loaded_matchparen = 1
@@ -87,9 +115,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-
-set undofile
-set undodir=~/.undo
 
 set listchars=tab:▸\ ,eol:¬
 
