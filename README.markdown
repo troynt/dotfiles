@@ -2,7 +2,7 @@
 
 ## Get the files
 
-    git clone git://github.com/brettbuddin/dotfiles.git ~/.dotfiles
+    git clone git://github.com/troynt/dotfiles.git ~/.dotfiles
 
 ## Setup configuration
 
