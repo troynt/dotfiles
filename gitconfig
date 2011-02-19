@@ -2,10 +2,10 @@
 	name = Troy Thompson
 	email = troynt@gmail.com
 [github]
-	user = troynt
+  user = troynt
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
+  excludesfile = ~/.gitignore
+  editor = vim
 [color]
   branch = auto
   diff = auto
@@ -14,4 +14,17 @@
   autocorrect = 1
 [alias]
   lol=log --oneline --graph --decorate
-	human = name-rev --name-only
+  human = name-rev --name-only
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+  insteadOf = "github:"
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
