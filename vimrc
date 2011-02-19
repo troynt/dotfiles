@@ -46,6 +46,10 @@ autocmd FileType xml set omnifunc=xmlcompleteCompleteTags
 autocmd FileType php set omnifunc=phpcompleteCompletePHP
 autocmd FileType c set omnifunc=ccompleteComplete
 
+" Enable spellchecking on git commit messages
+au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
+
+
 " Drupal ***************
 augroup drupal
   autocmd BufRead,BufNewFile *.php set filetype=php
