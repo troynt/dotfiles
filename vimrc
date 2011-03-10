@@ -19,7 +19,7 @@ syntax on
 set nonumber
 set guicursor=a:blinkon0
 set visualbell t_vb=
-set spell
+set nospell
 
 set laststatus=2
 set ruler
@@ -37,6 +37,7 @@ autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
+autocmd BufRead *.as set filetype=actionscript
 
 autocmd FileType python set omnifunc=pythoncompleteComplete
 autocmd FileType javascript set omnifunc=javascriptcompleteCompleteJS
@@ -164,6 +165,34 @@ MapToggle <F3> number
 :vnoremap < <gv
 :vnoremap > >gv
 
+function! InsertTabWrapper()
+  let line = getline('.')                         " curline
+  let substr = strpart(line, -1, col('.')+1)      " from start to cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
+
+"function! InsertTabWrapper()
+"  let col = col('.') - 1
+"  if !col || getline('.')[col - 1] !~ '\k'
+"    return "\<tab>"
+"  else
+"    return "\<c-p>"
+"  endif
+"endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+"inoremap <s-tab> <c-n>
 
 " Plugin Settings ****************
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp'
@@ -171,7 +200,7 @@ let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp'
 
 " GUI Settings *******************
 if has("gui_running")
-  let g:zenesque_colors=1
+  let g:zenesque_colors=3
   set guioptions=egmrt
   set guifont=Dejavu_Sans_Mono:h14
   colorscheme zenesque
