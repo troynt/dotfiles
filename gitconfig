@@ -16,6 +16,9 @@
   lol=log --oneline --graph --decorate
   human = name-rev --name-only
 
+[url "troynt@git.drupal.org:project/"]
+  insteadOf = "dh:"
+
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
