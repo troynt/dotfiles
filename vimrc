@@ -100,7 +100,7 @@ set foldmethod=indent
 set foldnestmax=10
 set foldlevel=0
 set fillchars=vert:\|,fold:\
-set foldminlines=2
+set foldminlines=4
 noremap <space> za
 
 " Editing ************************
