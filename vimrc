@@ -121,6 +121,9 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
+filetype on " Automatically detect file types
+filetype plugin on
+
 set listchars=tab:▸\ ,eol:¬
 
 
