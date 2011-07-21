@@ -16,7 +16,7 @@ endif
 
 " View **********************
 syntax on
-set nonumber
+set number
 set guicursor=a:blinkon0
 set visualbell t_vb=
 set nospell
@@ -50,8 +50,12 @@ autocmd FileType c set omnifunc=ccompleteComplete
 " Enable spellchecking on git commit messages
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
 
+" Erb
+augroup eruby
+  autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
+augroup end
 
-" Drupal ***************
+" Drupal
 augroup drupal
   autocmd BufRead,BufNewFile *.php set filetype=php
   autocmd BufRead,BufNewFile *.module set filetype=php
@@ -71,6 +75,9 @@ set wildmenu
 set complete=.,t
 "set wildignore=*~
 
+
+set showcmd "show incomplete cmds down the bottom
+set showmode "show current mode down the bottom
 
 " Indentation ********************
 set autoindent
@@ -96,11 +103,11 @@ set incsearch
 
 " Code Folding *******************
 set foldclose=
-set foldmethod=indent
-set foldnestmax=10
-set foldlevel=0
+set foldmethod=syntax
+set foldnestmax=2
+set foldlevel=1
 set fillchars=vert:\|,fold:\
-set foldminlines=4
+set foldminlines=10
 noremap <space> za
 
 " Editing ************************
@@ -140,6 +147,13 @@ map <C-q> <C-w>q
 
 " Custom Hotkeys *****************
 let mapleader = ","
+nmap <C-N><C-N> :set invnumber<CR>
+
+nmap <leader>rc :Rcontroller<CR>
+nmap <leader>rh :Rhelper<CR>
+nmap <leader>rm :Rmodel<CR>
+nmap <leader>rv :Rview .<CR>
+
 
 " splitting
 nmap <leader>swh  :topleft  vnew<CR>
@@ -158,7 +172,9 @@ map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
 map <leader>cd :cd %:p:h<CR>
 map <leader>p "0p
- 
+
+map <leader>t :NERDTree<CR>
+
 nnoremap Y y$
 
 MapToggle <F1> hlsearch
