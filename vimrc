@@ -138,11 +138,14 @@ set listchars=tab:▸\ ,eol:¬
 set nostartofline
 set mouse=a
 
+" DVORAK
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-q> <C-w>q
+
+
 
 
 " Custom Hotkeys *****************
@@ -175,6 +178,8 @@ map <leader>p "0p
 
 map <leader>t :NERDTree<CR>
 
+map <leader>j :Shell jshint %<CR>
+
 nnoremap Y y$
 
 MapToggle <F1> hlsearch
@@ -202,16 +207,23 @@ function! InsertTabWrapper()
   endif
 endfunction
 
-"function! InsertTabWrapper()
-"  let col = col('.') - 1
-"  if !col || getline('.')[col - 1] !~ '\k'
-"    return "\<tab>"
-"  else
-"    return "\<c-p>"
-"  endif
-"endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-"inoremap <s-tab> <c-n>
+
+function! s:ExecuteInShell(command)
+  let command = join(map(split(a:command), 'expand(v:val)'))
+  let winnr = bufwinnr('^' . command . '$')
+  silent! execute  winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
+  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
+  echo 'Execute ' . command . '...'
+  silent! execute 'silent %!'. command
+  silent! execute 'resize ' . line('$')
+  silent! redraw
+  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
+  echo 'Shell command ' . command . ' executed.'
+endfunction
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+
 
 " Plugin Settings ****************
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp'
