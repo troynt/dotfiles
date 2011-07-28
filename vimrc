@@ -178,7 +178,7 @@ map <leader>p "0p
 
 map <leader>t :NERDTree<CR>
 
-map <leader>j :Shell jshint %<CR>
+map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
 
 nnoremap Y y$
 

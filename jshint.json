@@ -4,7 +4,10 @@
         "spyOn",
         "it",
         "describe",
-        "expect"
+        "expect",
+        "jQuery",
+        "$",
+        "FB" //Facebook
     ],
 
     "node" : true,
@@ -26,11 +29,12 @@
     "noempty": false,
     "nonew": false,
     "nomen": false,
-    "onevar": true,
+    "onevar": false,
     "plusplus": false,
     "regexp": false,
-    "undef": true,
+    "undef": false,
     "sub": true,
     "strict": false,
-    "white": true
+    "white": false,
+    "maxerr": 200
 }
