@@ -7,7 +7,6 @@ call pathogen#runtime_append_all_bundles()
 " ---------------------------------
 " Helpers
 " ---------------------------------
-
 " Toggles options
 function! MapToggle(key, opt)
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
@@ -70,7 +69,6 @@ command! Switch call Switch()
 " ---------------------------------
 " UI
 " ---------------------------------
-
 syntax on
 set number
 set guicursor=a:blinkon0
@@ -84,8 +82,6 @@ set ch=2
 set ruler
 set rulerformat=%25(%n%m%r:\ %Y\ [%l,%v]\ %p%%%)
 let g:rails_statusline=0
-
-set fo-=r
 
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,latin1,default
@@ -109,8 +105,6 @@ au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
 augroup eruby
   autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
 augroup end
-  set go-=T
-  set go-=r
 
 " Drupal
 augroup drupal
@@ -128,11 +122,6 @@ let php_folding = 1
 " ---------------------------------
 " Text Formatting
 " ---------------------------------
-
-" Indentation ********************
-set showcmd "show incomplete cmds down the bottom
-set showmode "show current mode down the bottom
-
 " Indentation ********************
 set autoindent
 set smartindent
@@ -162,12 +151,13 @@ set complete=.,t
 " ---------------------------------
 " Buffers
 " ---------------------------------
-
 set hidden
 
 " ---------------------------------
 " Visual Cues
 " ---------------------------------
+set showcmd "show incomplete cmds down the bottom
+set showmode "show current mode down the bottom
 
 set ignorecase
 set hlsearch
@@ -187,8 +177,6 @@ noremap <space> za
 " ---------------------------------
 " Mappings
 " ---------------------------------
-
-
 let mapleader = ","
 
 " feature toggles
@@ -212,7 +200,7 @@ vnoremap > >gv
 set nostartofline
 set mouse=a
 
-" DVORAK
+" Window Movement
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 map <C-j> <C-w>j
@@ -220,7 +208,6 @@ map <C-k> <C-w>k
 map <C-q> <C-w>q
 
 " Custom Hotkeys *****************
-let mapleader = ","
 nmap <C-N><C-N> :set invnumber<CR>
 
 nmap <leader>rc :Rcontroller<CR>
@@ -229,7 +216,7 @@ nmap <leader>rm :Rmodel<CR>
 nmap <leader>rv :Rview .<CR>
 
 
-" splitting
+" Splitting
 nmap <leader>swh  :topleft  vnew<CR>
 nmap <leader>swl :botright vnew<CR>
 nmap <leader>swk    :topleft  new<CR>
@@ -239,14 +226,7 @@ nmap <leader>sl  :rightbelow vnew<CR>
 nmap <leader>sk     :leftabove  new<CR>
 nmap <leader>sj   :rightbelow new<CR>
 
-" window movement
-map <C-h> <C-w>h
-map <C-l> <C-w>l
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-q> <C-w>q
-
-" fuzzyfinder
+" FuzzyFinder
 map <leader>F :FufFile<CR>
 map <leader>/ :FufFile **/<CR>
 map <leader>f :FufFileWithCurrentBufferDir<CR>
@@ -256,14 +236,9 @@ map <leader>b :FufBuffer<CR>
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
-nnoremap Y y$
 
 " open a url on the current line in browser
 map ,w :call Browser()<CR>
-
-" Ex Mode is annoying.
-" Use this for formatting instead.
-map Q gq
 
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee %
@@ -278,7 +253,4 @@ map Q gq
 " Plugins
 " ---------------------------------
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
-
-
-
 
