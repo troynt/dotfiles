@@ -119,17 +119,6 @@ augroup drupal
   autocmd BufRead,BufNewFile *.inc set filetype=php
   autocmd BufRead,BufNewFile *.test set filetype=php
 augroup END
-  function! ToggleBackground()
-      if (g:solarized_style=="dark")
-      let g:solarized_style="light"
-      colorscheme solarized
-  else
-      let g:solarized_style="dark"
-      colorscheme solarized
-  endif
-  endfunction
-  command! ToggleBackground call ToggleBackground()
-endif
 
 let php_parent_error_close = 1
 let php_parent_error_open = 1
@@ -175,14 +164,6 @@ set complete=.,t
 " ---------------------------------
 
 set hidden
-set nobackup
-set nowritebackup
-set noswapfile
-if has("undofile")
-  set undofile
-  set undodir=~/.undo
-end
-
 
 " ---------------------------------
 " Visual Cues
@@ -216,8 +197,6 @@ MapToggle <F2> wrap
 MapToggle <F3> number
 MapToggle <F4> paste
 
-set undofile
-set undodir=~/.undo
 filetype on " Automatically detect file types
 filetype plugin on
 " new line creation with return
@@ -239,9 +218,6 @@ map <C-l> <C-w>l
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-q> <C-w>q
-
-
-
 
 " Custom Hotkeys *****************
 let mapleader = ","
@@ -277,8 +253,6 @@ map <leader>f :FufFileWithCurrentBufferDir<CR>
 map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
 
-
- 
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
@@ -286,13 +260,6 @@ nnoremap Y y$
 
 " open a url on the current line in browser
 map ,w :call Browser()<CR>
-
-" todo
-map ,a o<ESC>:r!date +'\%A, \%B \%d, \%Y'<CR>:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<CR>A<CR><ESC>
-map ,o o[ ] 
-map ,O O[ ] 
-map ,x :s/^\[ \]/[x]/<CR>
-map ,X :s/^\[x\]/[ ]/<CR>
 
 " Ex Mode is annoying.
 " Use this for formatting instead.
@@ -310,9 +277,8 @@ map Q gq
 " ---------------------------------
 " Plugins
 " ---------------------------------
-
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
 
 
 
-endif
+
