@@ -1,7 +1,14 @@
 set nocompatible
+set grepprg=ack
+set grepformat=%f:%l:%m
 
 call pathogen#runtime_append_all_bundles()
 
+" ---------------------------------
+" Helpers
+" ---------------------------------
+
+" Toggles options
 function! MapToggle(key, opt)
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
   exec 'nnoremap '.a:key.' '.cmd
@@ -9,35 +16,82 @@ function! MapToggle(key, opt)
 endfunction
 command! -nargs=+ MapToggle call MapToggle(<f-args>)
 
-" Auto-apply .vimrc settings after saving
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+" Open url on the current line in browser
+function! Browser()
+    let line0 = getline(".")
+    let line = matchstr(line0, "http[^ )]*")
+    let line = escape(line, "#?&;|%")
+    exec ':silent !open ' . "\"" . line . "\""
+endfunction
 
-" View **********************
+" Close inactive (hidden) buffers
+" http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers
+" http://stackoverflow.com/questions/1534835/how-do-i-close-all-buffers-that-arent-shown-in-a-window-in-vim
+function! CloseHiddenBuffers()
+  " figure out which buffers are visible in any tab
+  let visible = {}
+  for t in range(1, tabpagenr('$'))
+    for b in tabpagebuflist(t)
+      let visible[b] = 1
+    endfor
+  endfor
+  " close any buffer that are loaded and not visible
+  let l:tally = 0
+  for b in range(1, bufnr('$'))
+    if bufloaded(b) && !has_key(visible, b)
+      let l:tally += 1
+      exe 'bw ' . b
+    endif
+  endfor
+  echon "Deleted " . l:tally . " buffers"
+endfunction
+command! -nargs=* Only call CloseHiddenBuffers()
+
+" Quickly switch between .h and .m files
+function! Switch()
+  if expand('%:e') == 'h'
+    try | find %:t:r.m 
+    catch
+      try | find %:t:r.c
+      catch
+        try | find %:t:r.cc
+        catch
+          try | find %:t:r.cpp | catch | endtry
+        endtry
+      endtry
+    endtry
+  else
+    find %:t:r.h
+endif
+endfunction
+command! Switch call Switch()
+
+
+" ---------------------------------
+" UI
+" ---------------------------------
+
 syntax on
 set number
 set guicursor=a:blinkon0
 set visualbell t_vb=
 set nospell
-
+set nostartofline
+set mouse=a
+set backspace=indent,eol,start
 set laststatus=2
+set ch=2
 set ruler
 set rulerformat=%25(%n%m%r:\ %Y\ [%l,%v]\ %p%%%)
 let g:rails_statusline=0
 
+set fo-=r
+
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,latin1,default
 
-autocmd FileType html set filetype=xhtml
-autocmd BufRead *.css.php set filetype=css
-autocmd BufRead *.less set filetype=css
-autocmd BufRead *.js.php set filetype=javascript
-autocmd BufRead *.jsx set filetype=javascript
-autocmd BufRead *.mkd set filetype=mkd
-autocmd BufRead *.markdown set filetype=mkd
-autocmd BufRead *.god set filetype=ruby
-autocmd BufRead *.as set filetype=actionscript
+set isk+=_,$,@,%,#,-
+set listchars=tab:▸\ ,eol:¬
 
 autocmd FileType python set omnifunc=pythoncompleteComplete
 autocmd FileType javascript set omnifunc=javascriptcompleteCompleteJS
@@ -49,11 +103,14 @@ autocmd FileType c set omnifunc=ccompleteComplete
 
 " Enable spellchecking on git commit messages
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
+  set lines=40 columns=120
 
 " Erb
 augroup eruby
   autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
 augroup end
+  set go-=T
+  set go-=r
 
 " Drupal
 augroup drupal
@@ -62,12 +119,49 @@ augroup drupal
   autocmd BufRead,BufNewFile *.inc set filetype=php
   autocmd BufRead,BufNewFile *.test set filetype=php
 augroup END
+  function! ToggleBackground()
+      if (g:solarized_style=="dark")
+      let g:solarized_style="light"
+      colorscheme solarized
+  else
+      let g:solarized_style="dark"
+      colorscheme solarized
+  endif
+  endfunction
+  command! ToggleBackground call ToggleBackground()
+endif
 
-let php_sql_query=1
-let php_htmlInStrings=1
 let php_parent_error_close = 1
 let php_parent_error_open = 1
 let php_folding = 1
+
+
+" ---------------------------------
+" Text Formatting
+" ---------------------------------
+
+" Indentation ********************
+set showcmd "show incomplete cmds down the bottom
+set showmode "show current mode down the bottom
+
+" Indentation ********************
+set autoindent
+set smartindent
+set smarttab
+set nowrap
+set tabstop=4 
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set nosmarttab
+set formatoptions+=n
+set textwidth=80
+set virtualedit=block
+
+
+" ---------------------------------
+" Completion
+" ---------------------------------
 
 set completeopt=longest,menu
 set wildmode=list:longest,list:full
@@ -76,30 +170,29 @@ set complete=.,t
 "set wildignore=*~
 
 
-set showcmd "show incomplete cmds down the bottom
-set showmode "show current mode down the bottom
+" ---------------------------------
+" Buffers
+" ---------------------------------
 
-" Indentation ********************
-set autoindent
-set smartindent
-set smarttab
-set tabstop=4 
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-
-" Buffers ************************
 set hidden
 set nobackup
 set nowritebackup
 set noswapfile
+if has("undofile")
+  set undofile
+  set undodir=~/.undo
+end
 
 
-" Search ************************* 
+" ---------------------------------
+" Visual Cues
+" ---------------------------------
+
 set ignorecase
 set hlsearch
 set incsearch
+set showmatch
+set mat=5
 
 " Code Folding *******************
 set foldclose=
@@ -110,28 +203,30 @@ set fillchars=vert:\|,fold:\
 set foldminlines=10
 noremap <space> za
 
-" Editing ************************
-set backspace=indent,eol,start
+" ---------------------------------
+" Mappings
+" ---------------------------------
+
+
+let mapleader = ","
+
+" feature toggles
+MapToggle <F1> hlsearch
+MapToggle <F2> wrap
+MapToggle <F3> number
+MapToggle <F4> paste
+
+set undofile
+set undodir=~/.undo
+filetype on " Automatically detect file types
+filetype plugin on
+" new line creation with return
 map <S-Enter> O<ESC>
 map <Enter> o<ESC>
 
-set fo-=r
-
-let loaded_matchparen = 1
-
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-
-filetype on " Automatically detect file types
-filetype plugin on
-
-set listchars=tab:▸\ ,eol:¬
+" indentation
+vnoremap < <gv
+vnoremap > >gv
 
 
 " Movement ***********************
@@ -168,6 +263,13 @@ nmap <leader>sl  :rightbelow vnew<CR>
 nmap <leader>sk     :leftabove  new<CR>
 nmap <leader>sj   :rightbelow new<CR>
 
+" window movement
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-q> <C-w>q
+
 " fuzzyfinder
 map <leader>F :FufFile<CR>
 map <leader>/ :FufFile **/<CR>
@@ -175,13 +277,22 @@ map <leader>f :FufFileWithCurrentBufferDir<CR>
 map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
 
-map <leader>cd :cd %:p:h<CR>
 
-map <leader>p "0p
-
+ 
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
+nnoremap Y y$
+
+" open a url on the current line in browser
+map ,w :call Browser()<CR>
+
+" todo
+map ,a o<ESC>:r!date +'\%A, \%B \%d, \%Y'<CR>:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<CR>A<CR><ESC>
+map ,o o[ ] 
+map ,O O[ ] 
+map ,x :s/^\[ \]/[x]/<CR>
+map ,X :s/^\[x\]/[ ]/<CR>
 
 " Ex Mode is annoying.
 " Use this for formatting instead.
@@ -190,64 +301,18 @@ map Q gq
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee %
 
-nnoremap Y y$
 
-MapToggle <F1> hlsearch
-MapToggle <F2> wrap
-MapToggle <F3> number
-
-:vnoremap < <gv
-:vnoremap > >gv
-
-function! InsertTabWrapper()
-  let line = getline('.')                         " curline
-  let substr = strpart(line, -1, col('.')+1)      " from start to cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
-    return "\<tab>"
-  endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
-  elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
-  else
-    return "\<C-X>\<C-O>"                         " plugin matching
-  endif
-endfunction
-
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-
-function! s:ExecuteInShell(command)
-  let command = join(map(split(a:command), 'expand(v:val)'))
-  let winnr = bufwinnr('^' . command . '$')
-  silent! execute  winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
-  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
-  echo 'Execute ' . command . '...'
-  silent! execute 'silent %!'. command
-  silent! execute 'resize ' . line('$')
-  silent! redraw
-  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
-  echo 'Shell command ' . command . ' executed.'
-endfunction
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+" Ex Mode is annoying. 
+" Use this for formatting instead.
+map Q gq
 
 
-" Plugin Settings ****************
+" ---------------------------------
+" Plugins
+" ---------------------------------
+
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
 
-" GUI Settings *******************
-if has("gui_running")
-  let g:zenesque_colors=3
-  set guioptions=egmrt
-  set guifont=Dejavu_Sans_Mono:h14
-  colorscheme zenesque
 
-  set lines=40 columns=120
 
-  set go-=T
-  set go-=r
 endif
-

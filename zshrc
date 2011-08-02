@@ -7,6 +7,7 @@ export ZSH_THEME="simple"
 export EDITOR=vim
 
 source $ZSH/zshrc
+export PATH=~/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 bindkey '\e[1~' beginning-of-line #home
 bindkey '\e[4~' end-of-line #end
@@ -20,5 +21,3 @@ case $TERM in (xterm*)
   bindkey '\eOF' end-of-line
 esac
 
-alias up="cd .."
-alias ~="cd ~"

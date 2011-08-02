@@ -1,9 +1,0 @@
-autoload -U colors
-colors
-
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="*"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-source "$ZSH/themes/$ZSH_THEME.zsh"
