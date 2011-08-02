@@ -168,17 +168,27 @@ nmap <leader>sl  :rightbelow vnew<CR>
 nmap <leader>sk     :leftabove  new<CR>
 nmap <leader>sj   :rightbelow new<CR>
 
+" fuzzyfinder
 map <leader>F :FufFile<CR>
 map <leader>/ :FufFile **/<CR>
 map <leader>f :FufFileWithCurrentBufferDir<CR>
 map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
+
 map <leader>cd :cd %:p:h<CR>
+
 map <leader>p "0p
 
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
+
+" Ex Mode is annoying.
+" Use this for formatting instead.
+map Q gq
+
+" Save even if we forgot to open the file with sudo
+cmap w!! %!sudo tee %
 
 nnoremap Y y$
 
@@ -226,8 +236,7 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 
 " Plugin Settings ****************
-let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp'
-
+let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
 
 " GUI Settings *******************
 if has("gui_running")
