@@ -130,6 +130,27 @@ augroup drupal
   autocmd BufRead,BufNewFile *.test set filetype=php
 augroup END
 
+" set filetype
+autocmd FileType html set filetype=xhtml
+autocmd BufRead *.css.php set filetype=css
+autocmd BufRead *.less set filetype=css
+autocmd BufRead *.js.php set filetype=javascript
+autocmd BufRead *.jsx set filetype=javascript
+autocmd BufRead *.mkd set filetype=mkd
+autocmd BufRead *.markdown set filetype=mkd
+autocmd BufRead *.god set filetype=ruby
+autocmd BufRead *.as set filetype=actionscript
+
+" set completion
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+
 let php_parent_error_close = 1
 let php_parent_error_open = 1
 let php_folding = 1
