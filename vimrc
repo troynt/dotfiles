@@ -1,12 +1,27 @@
 set nocompatible
 set grepprg=ack
 set grepformat=%f:%l:%m
-
+set list
 call pathogen#runtime_append_all_bundles()
 
 " ---------------------------------
 " Helpers
 " ---------------------------------
+function! s:ExecuteInShell(command)
+  let command = join(map(split(a:command), 'expand(v:val)'))
+  let winnr = bufwinnr('^' . command . '$')
+  silent! execute winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
+  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
+  echo 'Execute ' . command . '...'
+  silent! execute 'silent %!'. command
+  silent! execute 'resize ' . line('$')
+  silent! redraw
+  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
+  echo 'Shell command ' . command . ' executed.'
+endfunction
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+
 
 " Toggles options
 function! MapToggle(key, opt)
@@ -91,7 +106,7 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,latin1,default
 
 set isk+=_,$,@,%,#,-
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
 
 autocmd FileType python set omnifunc=pythoncompleteComplete
 autocmd FileType javascript set omnifunc=javascriptcompleteCompleteJS
@@ -138,13 +153,12 @@ set autoindent
 set smartindent
 set smarttab
 set nowrap
-set tabstop=4 
+set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 set nosmarttab
 set formatoptions+=n
-set textwidth=80
 set virtualedit=block
 
 
