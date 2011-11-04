@@ -33,10 +33,10 @@ command! -nargs=+ MapToggle call MapToggle(<f-args>)
 
 " Open url on the current line in browser
 function! Browser()
-    let line0 = getline(".")
-    let line = matchstr(line0, "http[^ )]*")
-    let line = escape(line, "#?&;|%")
-    exec ':silent !open ' . "\"" . line . "\""
+  let line0 = getline(".")
+  let line = matchstr(line0, "http[^ )]*")
+  let line = escape(line, "#?&;|%")
+  exec ':silent !open ' . "\"" . line . "\""
 endfunction
 
 " Close inactive (hidden) buffers
@@ -83,6 +83,30 @@ command! Switch call Switch()
 
 
 " ---------------------------------
+" Text Formatting
+" ---------------------------------
+" Indentation ********************
+set autoindent
+set smartindent
+set smarttab
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set nosmarttab
+set formatoptions+=n
+set virtualedit=block
+
+" ---------------------------------
+" Color Scheme
+" ---------------------------------
+if( has("gui_running") )
+  colorscheme xoria256
+  set guifont=Inconsolata:h18
+  set transparency=5
+endif
+" ---------------------------------
 " UI
 " ---------------------------------
 syntax on
@@ -117,11 +141,6 @@ autocmd FileType c set omnifunc=ccompleteComplete
 au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
   set lines=40 columns=120
 
-" Erb
-augroup eruby
-  autocmd BufNewFile,BufRead *.html.erb set filetype=html.eruby
-augroup end
-
 " Drupal
 augroup drupal
   autocmd BufRead,BufNewFile *.php set filetype=php
@@ -135,11 +154,15 @@ autocmd FileType html set filetype=xhtml
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead *.js.php set filetype=javascript
+autocmd BufRead *.json set filetype=javascript
 autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
 autocmd BufRead *.as set filetype=actionscript
+
+autocmd BufRead *.php set ft=php.html
+autocmd BufNewFile *.php set ft=php.html
 
 " set completion
 autocmd FileType ruby set omnifunc=rubycomplete#Complete
@@ -151,27 +174,24 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 
+" java
+autocmd FileType java set autoindent
+autocmd FileType java set si
+autocmd FileType java set shiftwidth=2
+autocmd FileType java set expandtab!
+
+" actionscript
+autocmd FileType actionscript set autoindent
+autocmd FileType actionscript set si
+autocmd FileType actionscript set shiftwidth=2
+
+
 let php_parent_error_close = 1
 let php_parent_error_open = 1
 let php_folding = 1
 
-
-" ---------------------------------
-" Text Formatting
-" ---------------------------------
-" Indentation ********************
-set autoindent
-set smartindent
-set smarttab
-set nowrap
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set nosmarttab
-set formatoptions+=n
-set virtualedit=block
-
+let java_comment_strings=1
+let java_highlight_java_lang_ids=1
 
 " ---------------------------------
 " Completion
@@ -182,6 +202,17 @@ set wildmode=list:longest,list:full
 set wildmenu
 set complete=.,t
 "set wildignore=*~
+
+if has("gui")
+    " C-Space seems to work under gVim on both Linux and win32
+    inoremap <C-Space> <C-n>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <C-n>
+  else
+  " I have no idea of the name of Ctrl-Space elsewhere
+  endif
+endif
 
 
 " ---------------------------------
@@ -263,6 +294,7 @@ nmap <leader>sk     :leftabove  new<CR>
 nmap <leader>sj   :rightbelow new<CR>
 
 " FuzzyFinder
+map <leader>r :FufJumpList<CR>
 map <leader>F :FufFile<CR>
 map <leader>/ :FufFile **/<CR>
 map <leader>f :FufFileWithCurrentBufferDir<CR>
@@ -272,6 +304,9 @@ map <leader>b :FufBuffer<CR>
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
+map <leader>g :Shell gjslint %<CR>
+
+
 
 " open a url on the current line in browser
 map ,w :call Browser()<CR>
