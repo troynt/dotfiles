@@ -104,7 +104,8 @@ set virtualedit=block
 if( has("gui_running") )
   colorscheme xoria256
   set guifont=Inconsolata:h18
-  set transparency=5
+  set transparency=0
+  set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
 endif
 " ---------------------------------
 " UI
@@ -226,9 +227,12 @@ set hidden
 set showcmd "show incomplete cmds down the bottom
 set showmode "show current mode down the bottom
 
-set ignorecase
-set hlsearch
-set incsearch
+set ignorecase " searches are case insensitive...
+set smartcase  " ... unless they contain at least one capital letter
+
+set hlsearch " highlight matches
+set incsearch " incremental searching
+
 set showmatch
 set mat=5
 
@@ -305,7 +309,7 @@ map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
 map <leader>g :Shell gjslint %<CR>
-
+map <leader>. :Errors<CR>
 
 
 " open a url on the current line in browser
@@ -324,4 +328,4 @@ map Q gq
 " Plugins
 " ---------------------------------
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
-
+let g:syntastic_gjslint_conf = ' --custom_jsdoc_tags "module,method,requires,description"'
