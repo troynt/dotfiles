@@ -144,10 +144,11 @@ au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
 
 " Drupal
 augroup drupal
-  autocmd BufRead,BufNewFile *.php set filetype=php
-  autocmd BufRead,BufNewFile *.module set filetype=php
-  autocmd BufRead,BufNewFile *.inc set filetype=php
-  autocmd BufRead,BufNewFile *.test set filetype=php
+  autocmd BufRead,BufNewFile *.php set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.module set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.install set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.inc set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.test set filetype=php.drupal
 augroup END
 
 " set filetype
@@ -162,8 +163,10 @@ autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
 autocmd BufRead *.as set filetype=actionscript
 
-autocmd BufRead *.php set ft=php.html
-autocmd BufNewFile *.php set ft=php.html
+autocmd BufNewFile,BufRead *.php set ft=php.html
+
+autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
+autocmd BufNewFile,BufRead *.jst.coffee set ft=html
 
 " set completion
 autocmd FileType ruby set omnifunc=rubycomplete#Complete
