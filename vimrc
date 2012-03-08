@@ -6,8 +6,7 @@ call pathogen#runtime_append_all_bundles()
 " ---------------------------------
 
 syntax on
-set background=dark
-colorscheme solarized
+colorscheme boo
 set title
 set titleold=
 set number
