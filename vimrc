@@ -6,7 +6,8 @@ call pathogen#runtime_append_all_bundles()
 " ---------------------------------
 
 syntax on
-colorscheme boo
+set background=dark
+colorscheme zenburn
 set title
 set titleold=
 set number
@@ -55,10 +56,14 @@ set ttimeoutlen=20
 set notimeout
 set clipboard=unnamed
 
+set laststatus=2
+set statusline+=%f
+set statusline+=%=
+set statusline+=%{SyntasticStatuslineFlag()}%*
+
 " highlight VCS conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-let g:rails_statusline=0
 let loaded_matchparen = 1
 
 set fo-=r
@@ -289,3 +294,13 @@ if system('uname') =~ 'Darwin'
     \ '/opt/local/bin:/opt/local/sbin:' .
     \ $PATH
 endif
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
