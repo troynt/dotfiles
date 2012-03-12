@@ -169,7 +169,7 @@ autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
 autocmd BufNewFile,BufRead *.jst.coffee set ft=html
 
 " set completion
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
+"autocmd FileType ruby set omnifunc=rubycomplete#Complete
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
