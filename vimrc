@@ -60,6 +60,9 @@ set laststatus=2
 set statusline+=%f
 set statusline+=%=
 set statusline+=%{SyntasticStatuslineFlag()}%*
+set statusline+=\ [
+set statusline+=%{strlen(&ft)?&ft:'none'} "
+set statusline+=]
 
 " highlight VCS conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
