@@ -1,0 +1,39 @@
+@import url("../main.css");
+body { 
+  color: #00F7FF;
+  background: #000;
+}
+
+a { 
+  color: #00FFB7; 
+}
+
+.status_message, .statusmessage {
+  color: #003638;
+}
+
+.screenname {
+  color: rgba(0, 204, 204, 1);
+  font-weight: bold;
+  display: block;
+}
+
+.themessage {
+  color: #fff;
+}
+
+.thetime {
+  color: #003638;
+}
+
+.incoming + .incoming .screenname {
+  display: none;
+}
+.outgoing + .outgoing .screenname {
+  display: none;
+}
+
+.incoming + .outgoing,
+.outgoing + .incoming {
+  margin-top: 1em;
+}
