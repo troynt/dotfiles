@@ -7,7 +7,7 @@ call pathogen#runtime_append_all_bundles()
 
 syntax on
 set background=dark
-colorscheme zenburn
+colorscheme wombat256
 set title
 set titleold=
 set number
@@ -249,6 +249,7 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
 
 let g:ctrlp_by_filename = 1
+let g:ctrlp_working_path_mode = 2
 
 let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|\.gif$\|\.png$' }
 
@@ -278,7 +279,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 autocmd Filetype gitcommit set tw=68 spell
 
-autocmd Filetype python,javascript,php,sh,bash,zsh set ts=4 sts=4 sw=4 expandtab
+autocmd Filetype python,javascript,php,sh,bash,zsh,puppet set ts=4 sts=4 sw=4 expandtab
 
 " don't use cindent for javascript
 autocmd FileType javascript setlocal nocindent
