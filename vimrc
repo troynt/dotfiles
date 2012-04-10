@@ -4,6 +4,10 @@ set grepformat=%f:%l:%m
 set list
 call pathogen#runtime_append_all_bundles()
 
+" Automatically cd into the directory that the file is in
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+
+
 " ---------------------------------
 " Helpers
 " ---------------------------------
@@ -163,7 +167,7 @@ autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
 autocmd BufRead *.as set filetype=actionscript
 
-autocmd BufNewFile,BufRead *.php set ft=php.html
+autocmd BufNewFile,BufRead *.php set ft=php
 
 autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
 autocmd BufNewFile,BufRead *.jst.coffee set ft=html
