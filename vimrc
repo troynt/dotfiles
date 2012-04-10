@@ -107,10 +107,12 @@ set virtualedit=block
 " ---------------------------------
 if( has("gui_running") )
   colorscheme xoria256
+  set guioptions=egmrt
   set guifont=Inconsolata:h18
   set transparency=0
   set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
 endif
+
 " ---------------------------------
 " UI
 " ---------------------------------
@@ -154,6 +156,7 @@ augroup drupal
   autocmd BufRead,BufNewFile *.inc set filetype=php.drupal
   autocmd BufRead,BufNewFile *.test set filetype=php.drupal
 augroup END
+
 
 " set filetype
 autocmd FileType html set filetype=xhtml
@@ -207,6 +210,7 @@ let java_highlight_java_lang_ids=1
 
 set completeopt=longest,menu
 set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 set wildmenu
 set complete=.,t
 "set wildignore=*~
@@ -322,17 +326,73 @@ map <leader>. :Errors<CR>
 " open a url on the current line in browser
 map ,w :call Browser()<CR>
 
-" Save even if we forgot to open the file with sudo
-cmap w!! %!sudo tee %
+map <C-U> :!osascript ~/.dotfiles/applescripts/docksend.scpt %:~<CR>
 
+" todo
+map ,a o<ESC>:r!date +'\%A, \%B \%d, \%Y'<CR>:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<CR>A<CR><ESC>
+map ,o o[ ] 
+map ,O O[ ] 
+map ,x :s/^\[ \]/[x]/<CR>
+map ,X :s/^\[x\]/[ ]/<CR>
 
 " Ex Mode is annoying. 
 " Use this for formatting instead.
 map Q gq
 
+" Save even if we forgot to open the file with sudo
+cmap w!! %!sudo tee > /dev/null %
 
 " ---------------------------------
 " Plugins
 " ---------------------------------
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
 let g:syntastic_gjslint_conf = ' --custom_jsdoc_tags "module,method,requires,description"'
+
+" ---------------------------------
+" Auto Commands
+" ---------------------------------
+
+" set filetype
+autocmd FileType html set filetype=xhtml
+autocmd BufRead *.css.php set filetype=css
+autocmd BufRead *.less set filetype=css
+autocmd BufRead *.js.php set filetype=javascript
+autocmd BufRead *.jsx set filetype=javascript
+autocmd BufRead *.mkd set filetype=mkd
+autocmd BufRead *.markdown set filetype=mkd
+autocmd BufRead *.god set filetype=ruby
+autocmd BufRead *.as set filetype=actionscript
+
+" set completion
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+
+autocmd Filetype gitcommit set tw=68 spell
+
+autocmd Filetype javascript,php,sh,bash,zsh set ts=4 sts=4 sw=4 expandtab
+
+" don't use cindent for javascript
+autocmd FileType javascript setlocal nocindent
+
+" lint files
+:autocmd FileType php noremap <C-L> :!php -l %<CR>
+:autocmd FileType javascript noremap <C-L> :!jsl -nocontext -nologo -process %<CR>
+
+
+" ---------------------------------
+" OS X Stuff
+" ---------------------------------
+
+if system('uname') =~ 'Darwin'
+  let $PATH = $HOME .
+    \ '/usr/local/bin:/usr/local/sbin:' .
+    \ '/usr/pkg/bin:' .
+    \ '/opt/local/bin:/opt/local/sbin:' .
+    \ $PATH
+endif
