@@ -1,15 +1,9 @@
 set nocompatible
-set grepprg=ack
-set grepformat=%f:%l:%m
-set list
 call pathogen#runtime_append_all_bundles()
 
 " Automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
-
-" ---------------------------------
-" Helpers
 " ---------------------------------
 function! s:ExecuteInShell(command)
   let command = join(map(split(a:command), 'expand(v:val)'))
@@ -26,67 +20,6 @@ function! s:ExecuteInShell(command)
 endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
-
-" Toggles options
-function! MapToggle(key, opt)
-  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-  exec 'nnoremap '.a:key.' '.cmd
-  exec 'inoremap '.a:key." \<C-O>".cmd
-endfunction
-command! -nargs=+ MapToggle call MapToggle(<f-args>)
-
-" Open url on the current line in browser
-function! Browser()
-  let line0 = getline(".")
-  let line = matchstr(line0, "http[^ )]*")
-  let line = escape(line, "#?&;|%")
-  exec ':silent !open ' . "\"" . line . "\""
-endfunction
-
-" Close inactive (hidden) buffers
-" http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers
-" http://stackoverflow.com/questions/1534835/how-do-i-close-all-buffers-that-arent-shown-in-a-window-in-vim
-function! CloseHiddenBuffers()
-  " figure out which buffers are visible in any tab
-  let visible = {}
-  for t in range(1, tabpagenr('$'))
-    for b in tabpagebuflist(t)
-      let visible[b] = 1
-    endfor
-  endfor
-  " close any buffer that are loaded and not visible
-  let l:tally = 0
-  for b in range(1, bufnr('$'))
-    if bufloaded(b) && !has_key(visible, b)
-      let l:tally += 1
-      exe 'bw ' . b
-    endif
-  endfor
-  echon "Deleted " . l:tally . " buffers"
-endfunction
-command! -nargs=* Only call CloseHiddenBuffers()
-
-" Quickly switch between .h and .m files
-function! Switch()
-  if expand('%:e') == 'h'
-    try | find %:t:r.m 
-    catch
-      try | find %:t:r.c
-      catch
-        try | find %:t:r.cc
-        catch
-          try | find %:t:r.cpp | catch | endtry
-        endtry
-      endtry
-    endtry
-  else
-    find %:t:r.h
-endif
-endfunction
-command! Switch call Switch()
-
-
-" ---------------------------------
 " Text Formatting
 " ---------------------------------
 " Indentation ********************
@@ -117,24 +50,74 @@ endif
 " UI
 " ---------------------------------
 syntax on
+set title
+set titleold=
 set number
-set guicursor=a:blinkon0
+set nolist
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
-set nospell
-set nostartofline
 set mouse=a
+set showcmd
+set showmode
+set ch=1
+set grepprg=ack
+set grepformat=%f:%l:%m
+set binary
+set autoindent
+set smartindent
+set smarttab
+set guicursor=a:blinkon0
+set nowrap
 set backspace=indent,eol,start
-set laststatus=2
-set ch=2
-set ruler
-set rulerformat=%25(%n%m%r:\ %Y\ [%l,%v]\ %p%%%)
-let g:rails_statusline=0
-
+set nospell
+set linespace=0
+set tabstop=4 
+set shiftwidth=2
+set softtabstop=2
+set shiftround
+set expandtab
+set nosmarttab
+set formatoptions+=n
+set virtualedit=block
+set isk+=_,$,@,%,#,-
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,latin1,default
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set gdefault
+set foldenable
+set nostartofline
+set scrolljump=5
+set scrolloff=3
+set splitbelow
+set splitright
+set ttimeout
+set ttimeoutlen=20
+set notimeout
+set clipboard=unnamed
+
+set laststatus=2
+set statusline+=%f
+set statusline+=%=
+set statusline+=%{SyntasticStatuslineFlag()}%*
+set statusline+=\ [
+set statusline+=%{strlen(&ft)?&ft:'none'} "
+set statusline+=]
+
+set fo-=r
+
+" highlight VCS conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+let loaded_matchparen = 1
 
 set isk+=_,$,@,%,#,-
+set listchars=tab:▸\ ,eol:¬
+set isk+=_,$,@,%,#,-
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
+set fo-=r
 
 autocmd FileType python set omnifunc=pythoncompleteComplete
 autocmd FileType javascript set omnifunc=javascriptcompleteCompleteJS
@@ -208,9 +191,15 @@ let java_highlight_java_lang_ids=1
 " Completion
 " ---------------------------------
 
-set completeopt=longest,menu
+set completeopt=longest,menuone,preview
 set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+
+set wildignore+=*/.hg,*/.git,*/.svn
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc
+set wildignore+=*.sw?
+set wildignore+=.DS_Store
+
 set wildmenu
 set complete=.,t
 "set wildignore=*~
@@ -231,9 +220,15 @@ endif
 " Buffers
 " ---------------------------------
 set hidden
+set nobackup
+set nowritebackup
+set noswapfile
+set nobackup
+set nowritebackup
+set noswapfile
+
 
 " ---------------------------------
-" Visual Cues
 " ---------------------------------
 set showcmd "show incomplete cmds down the bottom
 set showmode "show current mode down the bottom
@@ -260,8 +255,16 @@ noremap <space> za
 " Mappings
 " ---------------------------------
 let mapleader = ","
+nnoremap ; :
 
 " feature toggles
+function! MapToggle(key, opt)
+  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+  exec 'nnoremap '.a:key.' '.cmd
+  exec 'inoremap '.a:key." \<C-O>".cmd
+endfunction
+command! -nargs=+ MapToggle call MapToggle(<f-args>)
+
 MapToggle <F1> hlsearch
 MapToggle <F2> wrap
 MapToggle <F3> number
@@ -299,14 +302,14 @@ nmap <leader>rv :Rview .<CR>
 
 
 " Splitting
-nmap <leader>swh  :topleft  vnew<CR>
+nmap <leader>swh :topleft vnew<CR>
 nmap <leader>swl :botright vnew<CR>
-nmap <leader>swk    :topleft  new<CR>
-nmap <leader>swj  :botright new<CR>
-nmap <leader>sh   :leftabove  vnew<CR>
-nmap <leader>sl  :rightbelow vnew<CR>
-nmap <leader>sk     :leftabove  new<CR>
-nmap <leader>sj   :rightbelow new<CR>
+nmap <leader>swk :topleft new<CR>
+nmap <leader>swj :botright new<CR>
+nmap <leader>sh :leftabove vnew<CR>
+nmap <leader>sl :rightbelow vnew<CR>
+nmap <leader>sk :leftabove new<CR>
+nmap <leader>sj :rightbelow new<CR>
 
 " FuzzyFinder
 map <leader>r :FufJumpList<CR>
@@ -315,7 +318,7 @@ map <leader>/ :FufFile **/<CR>
 map <leader>f :FufFileWithCurrentBufferDir<CR>
 map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
-
+ 
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
@@ -323,17 +326,14 @@ map <leader>g :Shell gjslint %<CR>
 map <leader>. :Errors<CR>
 
 
-" open a url on the current line in browser
-map ,w :call Browser()<CR>
+map <C-U> :!syncit<CR>
 
-map <C-U> :!osascript ~/.dotfiles/applescripts/docksend.scpt %:~<CR>
+" insert mode completion
+inoremap <C-L> <C-X><C-L>
+inoremap <C-F> <C-X><C-F>
 
-" todo
-map ,a o<ESC>:r!date +'\%A, \%B \%d, \%Y'<CR>:r!date +'\%A, \%B \%d, \%Y' \| sed 's/./-/g'<CR>A<CR><ESC>
-map ,o o[ ] 
-map ,O O[ ] 
-map ,x :s/^\[ \]/[x]/<CR>
-map ,X :s/^\[x\]/[ ]/<CR>
+" quick access to ack
+map <leader>a :Ack 
 
 " Ex Mode is annoying. 
 " Use this for formatting instead.
@@ -342,18 +342,67 @@ map Q gq
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee > /dev/null %
 
+" Close inactive (hidden) buffers
+" http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers
+" http://stackoverflow.com/questions/1534835/how-do-i-close-all-buffers-that-arent-shown-in-a-window-in-vim
+function! CloseHiddenBuffers()
+  " figure out which buffers are visible in any tab
+  let visible = {}
+  for t in range(1, tabpagenr('$'))
+    for b in tabpagebuflist(t)
+      let visible[b] = 1
+    endfor
+  endfor
+  " close any buffer that are loaded and not visible
+  let l:tally = 0
+  for b in range(1, bufnr('$'))
+    if bufloaded(b) && !has_key(visible, b)
+      let l:tally += 1
+      exe 'bw ' . b
+    endif
+  endfor
+  echon "Deleted " . l:tally . " buffers"
+endfunction
+command! -nargs=* Only call CloseHiddenBuffers()
+
+" quick access to running shell commands
+function! s:ExecuteInShell(command) " {{{
+    let command = join(map(split(a:command), 'expand(v:val)'))
+    let winnr = bufwinnr('^' . command . '$')
+    silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
+    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
+    echo 'Execute ' . command . '...'
+    silent! execute 'silent %!'. command
+    silent! redraw
+    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
+    silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
+    silent! execute 'AnsiEsc'
+    echo 'Shell command ' . command . ' executed.'
+endfunction " }}}
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+nnoremap <leader>! :Shell 
+
 " ---------------------------------
 " Plugins
 " ---------------------------------
-let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp|\.o$|\.exe$|\.bak$|\.swp|\.class$'
-let g:syntastic_gjslint_conf = ' --custom_jsdoc_tags "module,method,requires,description"'
+
+let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp'
+let g:statline_show_encoding = 0
+
+let g:syntastic_enable_signs = 1
+let g:syntastic_disabled_filetypes = ['html']
+
+let g:ctrlp_by_filename = 1
+let g:ctrlp_working_path_mode = 2
+
+let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|\.gif$\|\.png$' }
 
 " ---------------------------------
 " Auto Commands
 " ---------------------------------
 
 " set filetype
-autocmd FileType html set filetype=xhtml
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead *.js.php set filetype=javascript
@@ -375,15 +424,13 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 autocmd Filetype gitcommit set tw=68 spell
 
-autocmd Filetype javascript,php,sh,bash,zsh set ts=4 sts=4 sw=4 expandtab
+autocmd Filetype python,javascript,php,sh,bash,zsh,puppet set ts=4 sts=4 sw=4 expandtab
 
 " don't use cindent for javascript
 autocmd FileType javascript setlocal nocindent
 
-" lint files
-:autocmd FileType php noremap <C-L> :!php -l %<CR>
-:autocmd FileType javascript noremap <C-L> :!jsl -nocontext -nologo -process %<CR>
-
+autocmd FileType php set keywordprg=pman
+autocmd FileType php set iskeyword-=-
 
 " ---------------------------------
 " OS X Stuff
@@ -396,3 +443,13 @@ if system('uname') =~ 'Darwin'
     \ '/opt/local/bin:/opt/local/sbin:' .
     \ $PATH
 endif
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+

@@ -1,15 +1,14 @@
 # Dotfiles
 
-## Get the files
 
     git clone git://github.com/troynt/dotfiles.git ~/.dotfiles
 
-## Setup configuration
+The installer will **never** delete a file from your $HOME directory. If it encounters a file that isn't a symlink, it lets you handle the situation.
 
-To use these dotfiles:
+## Uninstall
 
-    rake
+To uninstall:
 
-To remove these dotfiles:
+    $ ~/.dotfiles/scripts/uninstall.sh
 
-    rake unlink
+This will only remove files of interest from $HOME that are symlinks.
