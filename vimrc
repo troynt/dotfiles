@@ -5,22 +5,6 @@ call pathogen#runtime_append_all_bundles()
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 " ---------------------------------
-function! s:ExecuteInShell(command)
-  let command = join(map(split(a:command), 'expand(v:val)'))
-  let winnr = bufwinnr('^' . command . '$')
-  silent! execute winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
-  setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
-  echo 'Execute ' . command . '...'
-  silent! execute 'silent %!'. command
-  silent! execute 'resize ' . line('$')
-  silent! redraw
-  silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-  silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
-  echo 'Shell command ' . command . ' executed.'
-endfunction
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-
-" ---------------------------------
 " Color Scheme
 " ---------------------------------
 if( has("gui_running") )
@@ -52,7 +36,6 @@ set ignorecase
 set incsearch
 set isk+=_,$,@,%,#,-
 set linespace=0
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set mouse=a
 set nolist
 set nosmarttab
@@ -101,78 +84,7 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 let loaded_matchparen = 1
 
 set isk+=_,$,@,%,#,-
-set listchars=tab:▸\ ,eol:¬
-set isk+=_,$,@,%,#,-
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
-set fo-=r
-
-autocmd FileType python set omnifunc=pythoncompleteComplete
-autocmd FileType javascript set omnifunc=javascriptcompleteCompleteJS
-autocmd FileType html set omnifunc=htmlcompleteCompleteTags
-autocmd FileType css set omnifunc=csscompleteCompleteCSS
-autocmd FileType xml set omnifunc=xmlcompleteCompleteTags
-autocmd FileType php set omnifunc=phpcompleteCompletePHP
-autocmd FileType c set omnifunc=ccompleteComplete
-
-" Enable spellchecking on git commit messages
-au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
-  set lines=40 columns=120
-
-" Drupal
-augroup drupal
-  autocmd BufRead,BufNewFile *.php set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.module set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.install set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.inc set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.test set filetype=php.drupal
-augroup END
-
-
-" set filetype
-autocmd FileType html set filetype=xhtml
-autocmd BufRead *.css.php set filetype=css
-autocmd BufRead *.less set filetype=css
-autocmd BufRead *.js.php set filetype=javascript
-autocmd BufRead *.json set filetype=javascript
-autocmd BufRead *.js set filetype=javascript
-autocmd BufRead *.mkd set filetype=mkd
-autocmd BufRead *.markdown set filetype=mkd
-autocmd BufRead *.god set filetype=ruby
-autocmd BufRead *.as set filetype=actionscript
-
-autocmd BufNewFile,BufRead *.php set ft=php
-
-autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
-autocmd BufNewFile,BufRead *.jst.coffee set ft=html
-
-" set completion
-"autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-
-" java
-autocmd FileType java set autoindent
-autocmd FileType java set si
-autocmd FileType java set shiftwidth=2
-autocmd FileType java set expandtab!
-
-" actionscript
-autocmd FileType actionscript set autoindent
-autocmd FileType actionscript set si
-autocmd FileType actionscript set shiftwidth=2
-
-
-let php_parent_error_close = 1
-let php_parent_error_open = 1
-let php_folding = 1
-
-let java_comment_strings=1
-let java_highlight_java_lang_ids=1
 
 " ---------------------------------
 " Completion
@@ -203,9 +115,6 @@ else " no gui
 endif
 
 
-" ---------------------------------
-" Buffers
-" ---------------------------------
 set hidden
 set nobackup
 set nowritebackup
@@ -214,12 +123,10 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-
-" ---------------------------------
-" ---------------------------------
 set showcmd "show incomplete cmds down the bottom
 set showmode "show current mode down the bottom
 
+" Search *******************
 set ignorecase " searches are case insensitive...
 set smartcase  " ... unless they contain at least one capital letter
 
@@ -389,6 +296,19 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " ---------------------------------
 " Auto Commands
 " ---------------------------------
+" Drupal
+augroup drupal
+  autocmd BufRead,BufNewFile *.php set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.module set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.install set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.inc set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.test set filetype=php.drupal
+augroup END
+
+autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
+autocmd BufNewFile,BufRead *.jst.coffee set ft=html
+
+
 
 " set filetype
 autocmd BufRead *.css.php set filetype=css
@@ -419,6 +339,14 @@ autocmd FileType javascript setlocal nocindent
 
 autocmd FileType php set keywordprg=pman
 autocmd FileType php set iskeyword-=-
+
+let php_parent_error_close = 1
+let php_parent_error_open = 1
+let php_folding = 1
+
+let java_comment_strings=1
+let java_highlight_java_lang_ids=1
+
 
 " ---------------------------------
 " OS X Stuff
