@@ -286,6 +286,7 @@ let g:statline_show_encoding = 0
 
 let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
+let g:syntastic_gjslint_conf = ' --custom_jsdoc_tags "module,method,requires,description"'
 let g:syntastic_check_on_open=1
 
 let g:ctrlp_by_filename = 1
