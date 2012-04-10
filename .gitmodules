@@ -4,3 +4,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim-align"]
+	path = vim-align
+	url = https://github.com/tsaleh/vim-align.git
