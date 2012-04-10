@@ -20,21 +20,6 @@ function! s:ExecuteInShell(command)
 endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
-" Text Formatting
-" ---------------------------------
-" Indentation ********************
-set autoindent
-set smartindent
-set smarttab
-set nowrap
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set nosmarttab
-set formatoptions+=n
-set virtualedit=block
-
 " ---------------------------------
 " Color Scheme
 " ---------------------------------
@@ -46,64 +31,66 @@ if( has("gui_running") )
   set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
 endif
 
-" ---------------------------------
-" UI
-" ---------------------------------
 syntax on
-set title
-set titleold=
-set number
-set nolist
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set visualbell t_vb=
-set mouse=a
-set showcmd
-set showmode
-set ch=1
-set grepprg=ack
-set grepformat=%f:%l:%m
-set binary
+
 set autoindent
-set smartindent
-set smarttab
-set guicursor=a:blinkon0
-set nowrap
 set backspace=indent,eol,start
-set nospell
-set linespace=0
-set tabstop=4 
-set shiftwidth=2
-set softtabstop=2
-set shiftround
-set expandtab
-set nosmarttab
-set formatoptions+=n
-set virtualedit=block
-set isk+=_,$,@,%,#,-
+set binary
+set ch=1
+set clipboard=unnamed
 set encoding=utf-8
+set expandtab
 set fileencodings=ucs-bom,utf-8,latin1,default
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-set gdefault
 set foldenable
+set formatoptions+=n
+set gdefault
+set grepformat=%f:%l:%m
+set grepprg=ack
+set guicursor=a:blinkon0
+set hlsearch
+set ignorecase
+set incsearch
+set isk+=_,$,@,%,#,-
+set linespace=0
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set mouse=a
+set nolist
+set nosmarttab
+set nospell
 set nostartofline
+set notimeout
+set nowrap
+set number
 set scrolljump=5
 set scrolloff=3
+set shiftround
+set shiftwidth=2
+set showcmd
+set showmode
+set smartcase
+set smartindent
+set smarttab
+set softtabstop=2
 set splitbelow
 set splitright
+set tabstop=2
+set tabstop=4 
+set title
+set titleold=
 set ttimeout
 set ttimeoutlen=20
-set notimeout
-set clipboard=unnamed
+set virtualedit=block
+set visualbell t_vb=
 
+" ---------------------------------
+" Status Line
+" ---------------------------------
 set laststatus=2
 set statusline+=%f
 set statusline+=%=
 set statusline+=%{SyntasticStatuslineFlag()}%*
 set statusline+=\ [
-set statusline+=%{strlen(&ft)?&ft:'none'} "
+set statusline+=%{strlen(&ft)?&ft:'none'}
 set statusline+=]
 
 set fo-=r
@@ -147,7 +134,7 @@ autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead *.js.php set filetype=javascript
 autocmd BufRead *.json set filetype=javascript
-autocmd BufRead *.jsx set filetype=javascript
+autocmd BufRead *.js set filetype=javascript
 autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
@@ -406,7 +393,7 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead *.js.php set filetype=javascript
-autocmd BufRead *.jsx set filetype=javascript
+autocmd BufRead *.js set filetype=javascript
 autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
