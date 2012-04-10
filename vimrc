@@ -57,7 +57,6 @@ set softtabstop=2
 set splitbelow
 set splitright
 set tabstop=2
-set tabstop=4 
 set title
 set titleold=
 set ttimeout
@@ -85,6 +84,7 @@ let loaded_matchparen = 1
 
 set isk+=_,$,@,%,#,-
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
+set list
 
 " ---------------------------------
 " Completion
@@ -298,11 +298,11 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " ---------------------------------
 " Drupal
 augroup drupal
-  autocmd BufRead,BufNewFile *.php set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.module set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.php     set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.module  set filetype=php.drupal
   autocmd BufRead,BufNewFile *.install set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.inc set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.test set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.inc     set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.test    set filetype=php.drupal
 augroup END
 
 autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
@@ -311,34 +311,38 @@ autocmd BufNewFile,BufRead *.jst.coffee set ft=html
 
 
 " set filetype
-autocmd BufRead *.css.php set filetype=css
-autocmd BufRead *.less set filetype=css
-autocmd BufRead *.js.php set filetype=javascript
-autocmd BufRead *.js set filetype=javascript
-autocmd BufRead *.mkd set filetype=mkd
+autocmd BufRead *.css.php  set filetype=css
+autocmd BufRead *.less     set filetype=css
+autocmd BufRead *.js.php   set filetype=javascript
+autocmd BufRead *.js       set filetype=javascript
+autocmd BufRead *.mkd      set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
-autocmd BufRead *.god set filetype=ruby
-autocmd BufRead *.as set filetype=actionscript
+autocmd BufRead *.god      set filetype=ruby
+autocmd BufRead *.as       set filetype=actionscript
 
 " set completion
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType ruby       set omnifunc=rubycomplete#Complete
+autocmd FileType python     set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php        set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c          set omnifunc=ccomplete#Complete
 
 autocmd Filetype gitcommit set tw=68 spell
-
-autocmd Filetype python,javascript,php,sh,bash,zsh,puppet set ts=4 sts=4 sw=4 expandtab
 
 " don't use cindent for javascript
 autocmd FileType javascript setlocal nocindent
 
 autocmd FileType php set keywordprg=pman
 autocmd FileType php set iskeyword-=-
+
+" java
+autocmd FileType java set autoindent si sw=2 expandtab!
+
+" actionscript
+autocmd FileType actionscript set autoindent si sw=2
 
 let php_parent_error_close = 1
 let php_parent_error_open = 1
