@@ -194,6 +194,12 @@ nmap <leader>rh :Rhelper<CR>
 nmap <leader>rm :Rmodel<CR>
 nmap <leader>rv :Rview .<CR>
 
+" Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+" Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
 
 " Splitting
 nmap <leader>swh :topleft vnew<CR>
@@ -205,6 +211,12 @@ nmap <leader>sl :rightbelow vnew<CR>
 nmap <leader>sk :leftabove new<CR>
 nmap <leader>sj :rightbelow new<CR>
 
+nmap <Leader>al= :Tabularize /=<CR>
+vmap <Leader>al= :Tabularize /=<CR>
+nmap <Leader>al: :Tabularize /:\zs<CR>
+vmap <Leader>al: :Tabularize /:\zs<CR>
+
+
 " FuzzyFinder
 map <leader>r :FufJumpList<CR>
 map <leader>F :FufFile<CR>
@@ -212,7 +224,7 @@ map <leader>/ :FufFile **/<CR>
 map <leader>f :FufFileWithCurrentBufferDir<CR>
 map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
- 
+
 map <leader>t :NERDTree<CR>
 
 map <leader>j :Shell jshint % --config ~/.jshint.json<CR>
@@ -225,9 +237,6 @@ map <C-U> :!syncit<CR>
 " insert mode completion
 inoremap <C-L> <C-X><C-L>
 inoremap <C-F> <C-X><C-F>
-
-" quick access to ack
-map <leader>a :Ack 
 
 " Ex Mode is annoying. 
 " Use this for formatting instead.
@@ -286,7 +295,7 @@ let g:statline_show_encoding = 0
 
 let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
-let g:syntastic_gjslint_conf = ' --custom_jsdoc_tags "module,method,requires,description"'
+let g:syntastic_javascript_gjslint_conf = ' --custom_jsdoc_tags "module,method,requires,description"'
 let g:syntastic_check_on_open=1
 
 let g:ctrlp_by_filename = 1
