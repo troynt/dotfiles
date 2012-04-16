@@ -45,7 +45,7 @@ set notimeout
 set nowrap
 set number
 set scrolljump=5
-set scrolloff=3
+set scrolloff=3 " start scrolling before cursor at end
 set shiftround
 set shiftwidth=2
 set showcmd
@@ -79,8 +79,6 @@ set fo-=r
 
 " highlight VCS conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-let loaded_matchparen = 1
 
 set isk+=_,$,@,%,#,-
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
@@ -308,27 +306,25 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " ---------------------------------
 " Drupal
 augroup drupal
-  autocmd BufRead,BufNewFile *.php     set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.module  set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.install set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.inc     set filetype=php.drupal
-  autocmd BufRead,BufNewFile *.test    set filetype=php.drupal
+  autocmd BufRead,BufNewFile *.php     set ft=php.drupal
+  autocmd BufRead,BufNewFile *.module  set ft=php.drupal
+  autocmd BufRead,BufNewFile *.install set ft=php.drupal
+  autocmd BufRead,BufNewFile *.inc     set ft=php.drupal
+  autocmd BufRead,BufNewFile *.test    set ft=php.drupal
 augroup END
 
 autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
 autocmd BufNewFile,BufRead *.jst.coffee set ft=html
 
-
-
 " set filetype
-autocmd BufRead *.css.php  set filetype=css
-autocmd BufRead *.less     set filetype=css
-autocmd BufRead *.js.php   set filetype=javascript
-autocmd BufRead *.js       set filetype=javascript
-autocmd BufRead *.mkd      set filetype=mkd
-autocmd BufRead *.markdown set filetype=mkd
-autocmd BufRead *.god      set filetype=ruby
-autocmd BufRead *.as       set filetype=actionscript
+autocmd BufRead *.css.php  set ft=css
+autocmd BufRead *.less     set ft=css
+autocmd BufRead *.js.php   set ft=javascript
+autocmd BufRead *.js       set ft=javascript
+autocmd BufRead *.mkd      set ft=mkd
+autocmd BufRead *.markdown set ft=mkd
+autocmd BufRead *.god      set ft=ruby
+autocmd BufRead *.as       set ft=actionscript
 
 " set completion
 autocmd FileType ruby       set omnifunc=rubycomplete#Complete
