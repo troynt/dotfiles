@@ -177,6 +177,11 @@ vnoremap > >gv
 set nostartofline
 set mouse=a
 
+" Dvorak Key Movement
+no h j
+no t k
+no n l
+
 " Window Movement
 map <C-h> <C-w>h
 map <C-l> <C-w>l
@@ -318,7 +323,7 @@ autocmd BufNewFile,BufRead *.jst.coffee set ft=html
 
 " set filetype
 autocmd BufRead *.css.php  set ft=css
-autocmd BufRead *.less     set ft=css
+autocmd BufRead *.less  set ft=less
 autocmd BufRead *.js.php   set ft=javascript
 autocmd BufRead *.js       set ft=javascript
 autocmd BufRead *.mkd      set ft=mkd
