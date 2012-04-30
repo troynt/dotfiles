@@ -266,6 +266,7 @@ autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
 autocmd BufRead *.as set filetype=actionscript
+autocmd BufRead *.sls set filetype=yaml
 
 " set completion
 autocmd FileType ruby set omnifunc=rubycomplete#Complete
