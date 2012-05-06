@@ -8,7 +8,9 @@ autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 " Color Scheme
 " ---------------------------------
 if( has("gui_running") )
-  colorscheme xoria256
+  "colorscheme xoria256
+  colorscheme solarized
+  set background=dark
   set guioptions=egmrt
   set guifont=Inconsolata:h18
   set transparency=0
