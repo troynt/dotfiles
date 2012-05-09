@@ -138,7 +138,7 @@ set mat=5
 
 " Code Folding *******************
 set foldclose=
-set foldmethod=syntax
+set foldmethod=indent
 set foldnestmax=2
 set foldlevel=1
 set fillchars=vert:\|,fold:\
@@ -313,7 +313,7 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " ---------------------------------
 " Drupal
 augroup drupal
-  autocmd BufRead,BufNewFile *.php     set ft=php.drupal
+  autocmd BufRead,BufNewFile *.php     set ft=php.drupal.html
   autocmd BufRead,BufNewFile *.module  set ft=php.drupal
   autocmd BufRead,BufNewFile *.install set ft=php.drupal
   autocmd BufRead,BufNewFile *.inc     set ft=php.drupal
@@ -345,8 +345,9 @@ autocmd FileType c          set omnifunc=ccomplete#Complete
 
 autocmd Filetype gitcommit set tw=68 spell
 
-" don't use cindent for javascript
+" disable cindent on some file types
 autocmd FileType javascript setlocal nocindent
+autocmd FileType css setlocal nocindent
 
 autocmd FileType php set keywordprg=pman
 autocmd FileType php set iskeyword-=-
