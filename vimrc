@@ -159,13 +159,14 @@ function! MapToggle(key, opt)
 endfunction
 command! -nargs=+ MapToggle call MapToggle(<f-args>)
 
-MapToggle <F1> hlsearch
-MapToggle <F2> wrap
-MapToggle <F3> number
-MapToggle <F4> paste
+map <F1> :TagbarToggle <CR>
+MapToggle <F2> hlsearch
+MapToggle <F3> wrap
+MapToggle <F4> number
 
 filetype on " Automatically detect file types
 filetype plugin on
+filetype plugin indent on
 " new line creation with return
 map <S-Enter> O<ESC>
 map <Enter> o<ESC>
