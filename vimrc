@@ -180,11 +180,6 @@ vnoremap > >gv
 set nostartofline
 set mouse=a
 
-" Dvorak Key Movement
-no h j
-no t k
-no n l
-
 " Window Movement
 map <C-h> <C-w>h
 map <C-l> <C-w>l
@@ -321,18 +316,17 @@ augroup drupal
   autocmd BufRead,BufNewFile *.test    set ft=php.drupal
 augroup END
 
-autocmd BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
-autocmd BufNewFile,BufRead *.jst.coffee set ft=html
-
 " set filetype
-autocmd BufRead *.css.php  set ft=css
-autocmd BufRead *.less  set ft=less
-autocmd BufRead *.js.php   set ft=javascript
-autocmd BufRead *.js       set ft=javascript
-autocmd BufRead *.mkd      set ft=mkd
-autocmd BufRead *.markdown set ft=mkd
-autocmd BufRead *.god      set ft=ruby
-autocmd BufRead *.as       set ft=actionscript
+autocmd BufRead,BufNewFile *.html.erb   set ft=html.eruby.eruby-rails
+autocmd BufRead,BufNewFile *.jst.coffee set ft=html
+autocmd BufRead,BufNewFile *.css.php    set ft=css
+autocmd BufRead,BufNewFile *.less       set ft=less
+autocmd BufRead,BufNewFile *.js.php     set ft=javascript
+autocmd BufRead,BufNewFile *.js         set ft=javascript
+autocmd BufRead,BufNewFile *.mkd        set ft=mkd
+autocmd BufRead,BufNewFile *.markdown   set ft=mkd
+autocmd BufRead,BufNewFile *.god        set ft=ruby
+autocmd BufRead,BufNewFile *.as         set ft=actionscript
 
 " set completion
 autocmd FileType ruby       set omnifunc=rubycomplete#Complete
@@ -387,4 +381,5 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
 
