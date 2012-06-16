@@ -16,3 +16,9 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar/
+[submodule "vim/bundle/editorconfig"]
+	path = vim/bundle/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "vim/bundle/sparkup"]
+	path = vim/bundle/sparkup
+	url = https://github.com/kogakure/vim-sparkup.git
