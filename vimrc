@@ -317,12 +317,13 @@ augroup drupal
 augroup END
 
 " set filetype
-autocmd BufRead,BufNewFile *.html.erb   set ft=html.eruby.eruby-rails
+autocmd BufRead,BufNewFile *.erb   set ft=html.eruby.eruby-rails
 autocmd BufRead,BufNewFile *.jst.coffee set ft=html
 autocmd BufRead,BufNewFile *.css.php    set ft=css
 autocmd BufRead,BufNewFile *.less       set ft=less
 autocmd BufRead,BufNewFile *.js.php     set ft=javascript
 autocmd BufRead,BufNewFile *.js         set ft=javascript
+autocmd BufRead,BufNewFile *.json       set ft=javascript
 autocmd BufRead,BufNewFile *.mkd        set ft=mkd
 autocmd BufRead,BufNewFile *.markdown   set ft=mkd
 autocmd BufRead,BufNewFile *.god        set ft=ruby
