@@ -12,9 +12,14 @@ if( has("gui_running") )
   colorscheme solarized
   set background=dark
   set guioptions=egmrt
-  set guifont=Inconsolata:h18
-  set transparency=0
-  set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
+  " todo.. if osx
+  if( has("gui_macvim") )
+    set guifont=Inconsolata:h18
+    set transparency=0
+    set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
+  else
+    set guifont=Inconsolata\ Medium\ 16
+  endif
 endif
 
 syntax on
