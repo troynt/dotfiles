@@ -2,7 +2,7 @@ autoload -U colors
 colors
 
 setopt PROMPT_SUBST
-bindkey -v
+bindkey -e
 
 stty erase ˆH
 
