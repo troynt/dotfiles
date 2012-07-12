@@ -35,7 +35,9 @@ set softtabstop=2
 set shiftround
 set expandtab
 set nosmarttab
-set formatoptions+=n
+set formatoptions=1
+set linebreak
+set breakat=\ |@-+;:,./?^I
 set virtualedit=block
 set isk+=_,$,@,%,#,-
 set encoding=utf-8
