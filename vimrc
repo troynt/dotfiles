@@ -324,6 +324,7 @@ augroup END
 " set filetype
 autocmd BufRead,BufNewFile *.erb   set ft=html.eruby.eruby-rails
 autocmd BufRead,BufNewFile *.jst.coffee set ft=html
+autocmd BufRead,BufNewFile *.coffee set ft=coffee
 autocmd BufRead,BufNewFile *.css.php    set ft=css
 autocmd BufRead,BufNewFile *.less       set ft=less
 autocmd BufRead,BufNewFile *.js.php     set ft=javascript
