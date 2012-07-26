@@ -7,11 +7,13 @@ call pathogen#runtime_append_all_bundles()
 
 syntax on
 set background=dark
-colorscheme wombat256
+set t_Co=256
+colorscheme solarized
 set title
 set titleold=
 set number
 set nolist
+set lazyredraw
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
 set mouse=a
@@ -22,6 +24,7 @@ set grepprg=ack
 set grepformat=%f:%l:%m
 set binary
 set autoindent
+set copyindent
 set smartindent
 set smarttab
 set guicursor=a:blinkon0
@@ -48,6 +51,7 @@ set hlsearch
 set incsearch
 set gdefault
 set foldenable
+set foldmethod=syntax
 set nostartofline
 set scrolljump=5
 set scrolloff=3
@@ -291,6 +295,12 @@ autocmd FileType javascript setlocal nocindent
 
 autocmd FileType php set keywordprg=pman
 autocmd FileType php set iskeyword-=-
+
+" From http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
+augroup BWCCreateDir
+  au!
+  autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
+augroup END
 
 " ---------------------------------
 " OS X Stuff

@@ -20,7 +20,7 @@ function git_prompt_unpushed {
 }
 
 function git_prompt_branch {
-    echo -n $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
+    echo -n $(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
 function git_prompt_current_ref {
