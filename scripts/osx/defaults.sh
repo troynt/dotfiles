@@ -1,8 +1,10 @@
-# Enable the 2D Dock
-defaults write com.apple.dock no-glass -bool true
+# Set machine name
+scutil --set ComputerName "air"
+scutil --set HostName "air"
+scutil --set LocalHostName "air"
 
-# Make Dock icons of hidden applications translucent
-defaults write com.apple.dock showhidden -bool false
+# Set Dock hide time
+defaults write com.apple.Dock autohide-delay -float 0
 
 # Disable menu bar transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
