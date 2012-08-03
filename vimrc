@@ -312,6 +312,12 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " ---------------------------------
 " Auto Commands
 " ---------------------------------
+" go to the line we were last on when opening buffer
+autocmd BufReadPost *
+ \ if line("'\"") > 0 && line("'\"") <= line("$") |
+ \   exe "normal g`\"" |
+ \ endif
+
 " Drupal
 augroup drupal
   autocmd BufRead,BufNewFile *.php     set ft=php.drupal.html
