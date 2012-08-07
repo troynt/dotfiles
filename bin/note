@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+# note
+# Description: A simple way to create notes in Day One
+# Usage:
+#   $ note
+#   $ echo "Hello World" | note
+
+require "plist"
+require "tempfile"
+require "uuid"
+
+input = ""
+
+if STDIN.tty?
+  ENV['EDITOR'] = 'vi' if ENV['EDITOR'].nil?
+
+  temp = Tempfile.new(["dayone-#{Time.now.to_i}", '.mdown'])
+  system("#{ENV['EDITOR']} #{temp.path}")
+  input = temp.read.strip
+  temp.close
+else
+  input = STDIN.read.strip
+end
+
+unless input.empty?
+  uuid  = UUID.new.generate
+  entry = {
+    "Creation Date" => DateTime.now,
+    "Entry Text"    => input,
+    "Location"      => {
+      "Administrative Area" => "",
+      "Place Name"          => `hostname`
+    },
+    "Starred"       => false,
+    "UUID"          => uuid
+  }
+
+  entries_dir = Dir.new(File.expand_path("~/Dropbox/Apps/Day\ One/Journal.dayone/entries"))
+  filename    = File.join(entries_dir, "#{uuid}.doentry")
+
+  File.open(filename, 'w') { |f| f.write entry.to_plist }
+else
+  puts "No content to save."
+end
