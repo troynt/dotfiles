@@ -36,21 +36,6 @@ function git_prompt_current_ref {
     echo -n "${ref}"
 }
 
-function git_prompt_unpushed_changes {
-    local_branch=$(git_prompt_branch)
-    remote_repo=$(git config branch.$local_branch.remote)
-    git cherry -v $remote_repo/$local_branch 2>/dev/null
-}
-
-function git_prompt_need_push {
-    if [[ $(git_prompt_unpushed_changes) == '' ]]
-    then
-        echo ""
-    else
-        echo "with %{$fg[magenta]%}unpushed%{$reset_color%} "
-    fi
-}
-
 function git_prompt_dirty {
     what=$(git status 2>/dev/null | tail -n 1)
     if [[ $what == '' ]]
@@ -59,12 +44,12 @@ function git_prompt_dirty {
     else
         if [[ $what == 'nothing to commit (working directory clean)' ]]
         then
-            echo "%{$fg[green]%}$(git_prompt_branch)%{$reset_color%} "
+            echo "%{$fg[green]%}$(git_prompt_branch)%{$reset_color%}:"
         else
-            echo "%{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%} "
+            echo "%{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%}:"
         fi
     fi
 }
 
-PROMPT=$'$(number_of_jobs)$(git_prompt_dirty)$(git_prompt_need_push)%{$reset_color%}$ '
-RPROMPT='%{$fg[cyan]%}%c%{$reset_color%}'
+PROMPT=$'$(number_of_jobs)$ '
+RPROMPT='$(git_prompt_dirty)%{$reset_color%}%{$fg[cyan]%}%c%{$reset_color%}'
