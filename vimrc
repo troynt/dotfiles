@@ -1,4 +1,5 @@
 set nocompatible
+filetype plugin on
 call pathogen#runtime_append_all_bundles()
 
 " ---------------------------------
@@ -6,9 +7,7 @@ call pathogen#runtime_append_all_bundles()
 " ---------------------------------
 
 syntax on
-set background=dark
-set t_Co=256
-colorscheme solarized
+colorscheme zenburn
 set title
 set titleold=
 set number
@@ -51,7 +50,6 @@ set hlsearch
 set incsearch
 set gdefault
 set foldenable
-set foldmethod=syntax
 set nostartofline
 set scrolljump=5
 set scrolloff=3
@@ -273,6 +271,7 @@ autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
 autocmd BufRead *.as set filetype=actionscript
 autocmd BufRead *.sls set filetype=yaml
+autocmd BufRead,BufNewFile *.go set filetype=go
 
 " set completion
 autocmd FileType ruby set omnifunc=rubycomplete#Complete
@@ -283,8 +282,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-
-autocmd BufRead,BufNewFile *.go set filetype=go
 
 autocmd Filetype gitcommit set tw=68 spell
 
