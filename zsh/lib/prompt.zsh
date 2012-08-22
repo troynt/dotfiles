@@ -15,6 +15,11 @@ function machine_name {
     [ -f ~/.machine_name ] && cat ~/.machine_name || hostname -s
 }
 
+function number_of_jobs {
+    count=$(jobs | wc -l | tr -d ' ') || return
+    echo -n "${count}"
+}
+
 function git_prompt_unpushed {
     git cherry -v origin/$(git_prompt_branch) 2>/dev/null
 }
@@ -51,12 +56,12 @@ function git_prompt_dirty {
     else
         if [[ $what == 'nothing to commit (working directory clean)' ]]
         then
-            echo "on %{$fg[green]%}$(git_prompt_branch)%{$reset_color%}"
+            echo " %{$fg[green]%}$(git_prompt_branch)%{$reset_color%}"
         else
-            echo "on %{$fg[red]%}$(git_prompt_branch)%{$reset_color%}"
+            echo " %{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%}"
         fi
     fi
 }
 
-PROMPT=$'%{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_dirty)$(git_prompt_need_push)%{$reset_color%}\n› '
-RPROMPT=''
+PROMPT=$'($(number_of_jobs))$(git_prompt_dirty)$(git_prompt_need_push)%{$reset_color%} $ '
+RPROMPT='%{$fg[cyan]%}%c%{$reset_color%}'
