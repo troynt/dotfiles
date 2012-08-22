@@ -17,7 +17,10 @@ function machine_name {
 
 function number_of_jobs {
     count=$(jobs | wc -l | tr -d ' ') || return
-    echo -n "${count}"
+    if [[ $count -eq 0 ]]; then
+       return; 
+    fi
+    echo -n "[${count}] "
 }
 
 function git_prompt_unpushed {
@@ -44,7 +47,7 @@ function git_prompt_need_push {
     then
         echo ""
     else
-        echo " with %{$fg[magenta]%}unpushed%{$reset_color%}"
+        echo "with %{$fg[magenta]%}unpushed%{$reset_color%} "
     fi
 }
 
@@ -56,12 +59,12 @@ function git_prompt_dirty {
     else
         if [[ $what == 'nothing to commit (working directory clean)' ]]
         then
-            echo " %{$fg[green]%}$(git_prompt_branch)%{$reset_color%}"
+            echo "%{$fg[green]%}$(git_prompt_branch)%{$reset_color%} "
         else
-            echo " %{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%}"
+            echo "%{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%} "
         fi
     fi
 }
 
-PROMPT=$'($(number_of_jobs))$(git_prompt_dirty)$(git_prompt_need_push)%{$reset_color%} $ '
+PROMPT=$'$(number_of_jobs)$(git_prompt_dirty)$(git_prompt_need_push)%{$reset_color%}$ '
 RPROMPT='%{$fg[cyan]%}%c%{$reset_color%}'
