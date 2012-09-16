@@ -13,3 +13,5 @@ fi
 
 for file ($ZSH/lib/**/*.zsh) source $file
 for file ($ZSH/plugins/**/*.zsh) source $file
+
+export TERM=xterm-256color

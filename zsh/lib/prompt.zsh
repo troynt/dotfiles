@@ -4,7 +4,9 @@ colors
 setopt PROMPT_SUBST
 bindkey -e
 
-stty erase ˆH
+if [[ $(uname) == 'Darwin' ]]; then
+    stty erase ˆH
+fi
 
 REPORTTIME=10
 LISTMAX=0
