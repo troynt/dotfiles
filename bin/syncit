@@ -30,8 +30,6 @@ import os
 import os.path
 import subprocess
 
-from ConfigParser import ConfigParser
-
 def sync_to(source, dest):
     subprocess.call('cd %s && rsync -vPzrtl --delete --exclude=".git" $(pwd)/* %s' % (source, dest), shell=True)
 
@@ -40,34 +38,25 @@ def config_path(file_name, path='.'):
     files = [x for x in os.listdir(path) if os.path.isfile("%s/%s" % (path, x))]
 
     if file_name in files:
-        return "%s/%s" % (path, file_name)
+        return os.path.dirname("%s/%s" % (path, file_name))
     elif path == '/':
         return None
     else:
         return config_path(file_name, os.path.join(path, os.pardir))
 
 if __name__ == "__main__":
-    config_dir = os.path.dirname(config_path("project.cfg"))
+    config_dir = config_path(".syncit")
 
-    if not os.path.isdir(os.path.join(config_dir, ".git")):
-        print 'This isn\'t a git repository.'
-        exit(1)
+    if config_dir:
+        try:
+            f        = open(config_dir + "/.syncit")
+            location = f.readline()
 
-    try:
-        config = ConfigParser()
-        config.readfp(open(config_path("project.cfg")))
+            sync_to(config_dir, location)
 
-        branches       = config.items('branches')
-        current_branch = subprocess.check_output(['git rev-parse --abbrev-ref HEAD'], shell=True)
-        current_branch = current_branch.strip()
-
-        for branch, path in branches:
-            if branch == current_branch:
-                sync_to(config_dir, path)
-                break
-            elif branch == '*':
-                sync_to(config_dir, path)
-
-    except IOError as e:
-        print 'No project.cfg found.'
+        except IOError as e:
+            print 'No .syncit file found.'
+            exit(1)
+    else:
+        print 'No .syncit file found.'
         exit(1)
