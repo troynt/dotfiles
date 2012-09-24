@@ -2,29 +2,23 @@
 #
 # syncit
 #
-# Allows you to sync a particular git branch to a
-# specific directory (on a remote machine).
+# Provides a quick way of sending a project to a
+# specific location on a remote machine.
 #
-# Recursively looks upward for an ini-style config.
-# Once the config is located, it grabs the branch
-# list and, depending on what branch you're currently
-# sitting on, will rsync the contents of the project
-# to a specific directory.
+# I use this with Vagrant in my day-to-day work.
+#
+# Recursively looks upward for .syncit file.
+# Once the config is located, it pulls the upload 
+# location from the file and rsyncs the project 
+# contents to that location.
 #
 # It's a good idea to add the config to your .gitignore.
 #
 # Example usage:
-#   git checkout master
-#   syncit
-#   git checkout experiment
 #   syncit
 #
-# Example project.cfg:
-#   [branches]
-#   master: host:/webroot/project/branches/dev
-#   experiment: host:/webroot/project/branches/experiment
-#   *: host:/webroot/project/branches/other_dev
-#
+# Example .syncit file:
+#   host:/webroot/project/
 
 import os
 import os.path
