@@ -266,6 +266,7 @@ autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead *.js.php set filetype=javascript
 autocmd BufRead *.jsx set filetype=javascript
+autocmd BufRead *.md set filetype=mkd
 autocmd BufRead *.mkd set filetype=mkd
 autocmd BufRead *.markdown set filetype=mkd
 autocmd BufRead *.god set filetype=ruby
@@ -320,3 +321,12 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+" this would rock if my hard drive didn't make noise. gotta wait for an SSD on
+" this machine to use this.
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"if has("autocmd")
+"  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+"  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+"endif
