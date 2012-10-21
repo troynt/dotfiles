@@ -6,24 +6,17 @@ SOCKET="tmux-socket"
 if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
     VIRB_DIR=$HOME/Code/work/virb
     BASE_DIR=$HOME/Code/work/base
-    CODE_LAYOUT=93a9,127x58,0,0[127x44,0,0,127x13,0,45]
 
     # Virb code
     cd $VIRB_DIR
     tmux -L $SOCKET start-server
     tmux -L $SOCKET new-session -d -s $NAME -n virb
 
-    tmux -L $SOCKET split-window -v -t $NAME:1
-    tmux -L $SOCKET select-pane -t $NAME:1.0
-    tmux -L $SOCKET select-layout $CODE_LAYOUT
     tmux -L $SOCKET send-keys -t $NAME:1 "vim" C-m
 
     # Base code
     tmux -L $SOCKET set-option -t $NAME default-path $BASE_DIR
     tmux -L $SOCKET new-window -t $NAME:2 -n base
-    tmux -L $SOCKET split-window -v -t $NAME:2
-    tmux -L $SOCKET select-pane -t $NAME:2.0
-    tmux -L $SOCKET select-layout $CODE_LAYOUT
     tmux -L $SOCKET send-keys -t $NAME:2 "vim" C-m
 
     # Virtual Machine window

@@ -7,3 +7,4 @@ db/*.sqlite3
 mkmf.log
 *.sphinx.conf
 .vagrant
+.directory
