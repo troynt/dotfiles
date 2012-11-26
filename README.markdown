@@ -7,12 +7,7 @@ My setup. This is always my most up-to-date configuration for:
 * git
 * tmux
 
-...and a few other things.
-
-I use [Solarized](http://ethanschoonover.com/solarized) (dark) for both Terminal.app and Vim.
-
 ## Install
-
 
 To install:
 
