@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME="work"
+NAME="virb-station"
 SOCKET="tmux-socket"
 
 if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then

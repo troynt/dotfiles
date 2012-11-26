@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+NAME="game-station"
+SOCKET="tmux-socket"
+
+if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
+    WORK_DIR=$HOME/Code/src/github.com/brettbuddin/monger
+
+    # Normal work
+    cd WORK_DIR
+    tmux -L $SOCKET start-server
+    tmux -L $SOCKET new-session -d -s $NAME -n work
+
+    tmux -L $SOCKET send-keys -t $NAME:1 "vim" C-m
+
+    # Builds
+    tmux -L $SOCKET set-option -t $NAME default-path $WORK_DIR
+    tmux -L $SOCKET new-window -t $NAME:2 -n builds
+
+    tmux -L $SOCKET select-window -t $NAME:1
+fi
+
+tmux -L $SOCKET -u attach-session -t $NAME
