@@ -286,7 +286,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 autocmd Filetype gitcommit set tw=68 spell
 
-autocmd Filetype python,javascript,php,sh,bash,zsh,puppet,go set ts=4 sts=4 sw=4 expandtab
+autocmd Filetype python,javascript,php,sh,bash,zsh,puppet,go,css,scss set ts=4 sts=4 sw=4 expandtab
 
 " don't use cindent for javascript
 autocmd FileType javascript setlocal nocindent
