@@ -1,0 +1,97 @@
+#!/bin/bash
+#
+# git-build
+#
+# Examples:
+#
+#   git build test master
+#   git build live master
+#   git build test branch-one,branch-two,branch-three
+
+usage() {
+	echo "usage:"
+	echo "  git build <test|live> <branch[,other-branch]>"
+}
+
+main() {
+    if [ $# -lt 1 ]; then
+        usage
+        exit 1
+    fi
+
+    if [ $# -lt 2 ]; then
+        usage
+        exit 1
+    fi
+
+    if ! $(git_clean_working_tree_check); then
+        echo "Working copy should be clean."
+        exit 1
+    fi
+
+    if [ "$1" == "test" -o "$1" == "live" ]; then
+        local BRANCHES=$(echo $2 | tr "," "\n")
+
+        echo "-- Fetching remote branches"
+        git_quiet fetch origin
+
+        echo "-- Using \"origin/master\" as base for merges"
+        git_quiet branch -f $1 origin/$1
+        git_quiet checkout $1
+        git_quiet reset --hard origin/master
+
+        for branch in $BRANCHES
+        do
+            if $(exists origin/$branch $(git_remote_branches)); then
+                git_quiet merge --no-ff origin/$branch
+
+                if $(git_clean_working_tree_check); then
+                    echo -e "\033[32m-- Clean merge of \"origin/$branch\" succeeded\033[0m" 
+                else 
+                    echo -e "\033[31m-- Clean merge of \"origin/$branch\" failed\033[0m" 
+                    git_quiet reset --merge
+                fi
+            else
+                echo -e "\033[31m-- Branch \"origin/$branch\" doesn't exist\033[0m" 
+            fi
+        done
+
+        git_quiet push -f origin $1
+        git_quiet checkout -
+        git_quiet branch -D $1
+        echo "-- Done."
+    else
+        echo "Available build branches: test, live"
+    fi
+}
+
+git_quiet() {
+    git "$@" &> /dev/null
+}
+
+git_remote_branches() { 
+    git branch -r --no-color | sed 's/^[* ] //'; 
+}
+
+git_clean_working_tree_check() {
+    if ! git diff --no-ext-diff --ignore-submodules --quiet --exit-code; then
+        return 1
+    elif ! git diff-index --cached --quiet --ignore-submodules HEAD --; then
+        return 2
+    else
+        return 0
+    fi
+}
+
+escape() {
+    echo "$1" | sed 's/\([\.\$\*]\)/\\\1/g'
+}
+
+exists() {
+    local ITEM=$1
+    shift
+
+    echo " $@ " | grep -q " $(escape $ITEM) "
+}
+
+main "$@"
