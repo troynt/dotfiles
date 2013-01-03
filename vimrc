@@ -7,7 +7,7 @@ call pathogen#runtime_append_all_bundles()
 " ---------------------------------
 
 syntax on
-colorscheme zenburn
+colorscheme donbass
 set title
 set titleold=
 set number
