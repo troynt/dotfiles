@@ -22,7 +22,7 @@ function number_of_jobs {
     if [[ $count -eq 0 ]]; then
        return; 
     fi
-    echo -n "${count} "
+    echo -n "+"
 }
 
 function git_prompt_unpushed {
