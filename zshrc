@@ -6,3 +6,6 @@ export EDITOR=vim
 export TERM=screen-256color
 
 for file ($ZSH/modules/**/*.zsh) source $file
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
