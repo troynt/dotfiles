@@ -18,7 +18,7 @@ if( has("gui_running") )
     set transparency=0
     set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
   else
-    set guifont=Inconsolata\ Medium\ 16
+    set guifont=Inconsolata\ Medium\ 12
   endif
 endif
 
