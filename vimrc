@@ -7,7 +7,7 @@ call pathogen#runtime_append_all_bundles()
 " ---------------------------------
 
 syntax on
-colorscheme donbass
+colorscheme lodestone
 set title
 set titleold=
 set number
@@ -253,8 +253,8 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
 
 let g:ctrlp_by_filename = 1
-let g:ctrlp_working_path_mode = 2
-
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|\.gif$\|\.png$' }
 
 " ---------------------------------
