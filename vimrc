@@ -176,8 +176,8 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-q> <C-w>q
 
-map <C-b>b :CtrlPBuffer<CR>
-map <C-h>h :CtrlPMRU<CR>
+map <leader>/ :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
  
 nnoremap Y y$
 
