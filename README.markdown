@@ -1,12 +1,5 @@
 # Dotfiles
 
-My setup. This is always my most up-to-date configuration for:
-
-* vim
-* zsh
-* git
-* tmux
-
 ## Install
 
 To install:
