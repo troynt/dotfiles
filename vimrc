@@ -58,7 +58,9 @@ set splitright
 set ttimeout
 set ttimeoutlen=20
 set notimeout
-set clipboard=unnamed
+if system('uname') =~ 'Linux'
+  set clipboard=unnamed
+endif
 
 set laststatus=2
 set statusline+=%f
@@ -67,11 +69,6 @@ set statusline+=%{SyntasticStatuslineFlag()}%*
 set statusline+=\ [
 set statusline+=%{strlen(&ft)?&ft:'none'} "
 set statusline+=]
-
-" highlight VCS conflicts
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-let loaded_matchparen = 1
 
 set fo-=r
 
@@ -179,12 +176,12 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-q> <C-w>q
 
-map <leader>/ :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
-map <leader>h :CtrlPMRU<CR>
+map <C-b>b :CtrlPBuffer<CR>
+map <C-h>h :CtrlPMRU<CR>
  
 nnoremap Y y$
 
+" syncit command for local VM work
 map <C-U> :!syncit<CR>
 
 " insert mode completion
@@ -200,47 +197,6 @@ map Q gq
 
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee > /dev/null %
-
-" Close inactive (hidden) buffers
-" http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers
-" http://stackoverflow.com/questions/1534835/how-do-i-close-all-buffers-that-arent-shown-in-a-window-in-vim
-function! CloseHiddenBuffers()
-  " figure out which buffers are visible in any tab
-  let visible = {}
-  for t in range(1, tabpagenr('$'))
-    for b in tabpagebuflist(t)
-      let visible[b] = 1
-    endfor
-  endfor
-  " close any buffer that are loaded and not visible
-  let l:tally = 0
-  for b in range(1, bufnr('$'))
-    if bufloaded(b) && !has_key(visible, b)
-      let l:tally += 1
-      exe 'bw ' . b
-    endif
-  endfor
-  echon "Deleted " . l:tally . " buffers"
-endfunction
-command! -nargs=* Only call CloseHiddenBuffers()
-
-" quick access to running shell commands
-function! s:ExecuteInShell(command) " {{{
-    let command = join(map(split(a:command), 'expand(v:val)'))
-    let winnr = bufwinnr('^' . command . '$')
-    silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
-    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
-    echo 'Execute ' . command . '...'
-    silent! execute 'silent %!'. command
-    silent! redraw
-    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
-    silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
-    silent! execute 'AnsiEsc'
-    echo 'Shell command ' . command . ' executed.'
-endfunction " }}}
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <leader>! :Shell 
 
 " ---------------------------------
 " Plugins
@@ -265,6 +221,9 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead *.js.php set filetype=javascript
+
+" highlight VCS conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.md set filetype=mkd
 autocmd BufRead *.mkd set filetype=mkd
@@ -294,12 +253,6 @@ autocmd FileType javascript setlocal nocindent
 autocmd FileType php set keywordprg=pman
 autocmd FileType php set iskeyword-=-
 
-" From http://stackoverflow.com/questions/4292733/vim-creating-parent-directories-on-save
-augroup BWCCreateDir
-  au!
-  autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
-augroup END
-
 " ---------------------------------
 " OS X Stuff
 " ---------------------------------
@@ -320,13 +273,3 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-" this would rock if my hard drive didn't make noise. gotta wait for an SSD on
-" this machine to use this.
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-"if has("autocmd")
-"  au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-"  au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-"  au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-"endif
