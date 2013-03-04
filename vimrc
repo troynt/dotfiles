@@ -32,8 +32,8 @@ set backspace=indent,eol,start
 set nospell
 set linespace=0
 set tabstop=4 
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set shiftround
 set expandtab
 set nosmarttab
@@ -234,7 +234,7 @@ autocmd BufRead *.sls set filetype=yaml
 autocmd BufRead,BufNewFile *.go set filetype=go
 
 " set completion
-autocmd FileType ruby set omnifunc=rubycomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType ruby set omnifunc=rubycomplete#Complete ts=4 sts=2 sw=2 expandtab
 autocmd FileType python set omnifunc=pythoncomplete#Complete ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript setlocal nocindent
