@@ -234,24 +234,20 @@ autocmd BufRead *.sls set filetype=yaml
 autocmd BufRead,BufNewFile *.go set filetype=go
 
 " set completion
-autocmd FileType ruby set omnifunc=rubycomplete#Complete
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType ruby set omnifunc=rubycomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType python set omnifunc=pythoncomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS ts=4 sts=4 sw=4 expandtab
+autocmd FileType javascript setlocal nocindent
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
+autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS ts=4 sts=4 sw=4 expandtab
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP iskeyword-=- ts=4 sts=4 sw=4 keywordprg=pman expandtab
+autocmd FileType c set omnifunc=ccomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType bash,zsh,sh set ts=4 sts=4 sw=4 expandtab
+autocmd FileType go set ts=4 sts=4 sw=4 expandtab
 
 autocmd Filetype gitcommit set tw=68 spell
 
-autocmd Filetype python,javascript,php,sh,bash,zsh,puppet,go,css,scss set ts=4 sts=4 sw=4 expandtab
-
-" don't use cindent for javascript
-autocmd FileType javascript setlocal nocindent
-
-autocmd FileType php set keywordprg=pman
-autocmd FileType php set iskeyword-=-
 
 " ---------------------------------
 " OS X Stuff
