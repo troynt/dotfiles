@@ -1,2 +1,2 @@
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;32'
+GREP_OPTIONS='--color=auto'
+GREP_COLOR='1;32'
