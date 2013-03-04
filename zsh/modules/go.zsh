@@ -1,1 +1,1 @@
-export GOPATH=~/Code:/usr/local/go
+export GOPATH=$HOME/Code:/usr/local/go
