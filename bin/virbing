@@ -13,21 +13,18 @@ if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
     tmux -L $SOCKET start-server
     tmux -L $SOCKET new-session -d -s $NAME -n virb
 
-    tmux -L $SOCKET send-keys -t $NAME:1 "vim" C-m
-
     # Base code
     tmux -L $SOCKET set-option -t $NAME default-path $BASE_DIR
     tmux -L $SOCKET new-window -t $NAME:2 -n base
-    tmux -L $SOCKET send-keys -t $NAME:2 "vim" C-m
-
-    # Virtual Machine window
-    tmux -L $SOCKET set-option -t $NAME default-path $VIRB_DIR
-    tmux -L $SOCKET new-window -t $NAME:3 -n vm
-    tmux -L $SOCKET send-keys -t $NAME:3 "vagrant up && ssh virbvm" C-m
 
     # Virbot
     tmux -L $SOCKET set-option -t $NAME default-path $VIRBOT_DIR
-    tmux -L $SOCKET new-window -t $NAME:4 -n virbot
+    tmux -L $SOCKET new-window -t $NAME:3 -n virbot
+
+    # Virtual Machine window
+    tmux -L $SOCKET set-option -t $NAME default-path $VIRB_DIR
+    tmux -L $SOCKET new-window -t $NAME:4 -n vm
+    tmux -L $SOCKET send-keys -t $NAME:4 "vagrant up && ssh virbvm" C-m
 
     # VPN
     tmux -L $SOCKET set-option -t $NAME default-path $VIRB_DIR
