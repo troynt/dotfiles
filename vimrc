@@ -87,13 +87,6 @@ set statusline+=]
 
 set fo-=r
 
-if has("gui_running")
-  set guioptions=egmrt
-  set lines=40 columns=120
-  set go-=T
-  set go-=r
-endif
-
 " resize splits when window is resized
 au VimResized * exe "normal! \<c-w>="
 
@@ -240,7 +233,6 @@ autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead *.js.php set filetype=javascript
 
 " highlight VCS conflicts
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.md set filetype=mkd
 autocmd BufRead *.mkd set filetype=mkd
