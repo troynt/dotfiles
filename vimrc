@@ -10,6 +10,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'noah/vim256-color'
 Bundle 'ack.vim'
+Bundle 'ScrollColors'
 
 filetype plugin on
 
