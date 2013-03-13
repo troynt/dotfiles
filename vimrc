@@ -6,6 +6,8 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'noah/vim256-color'
@@ -19,7 +21,7 @@ filetype plugin on
 " ---------------------------------
 
 syntax on
-colorscheme lodestone
+colorscheme beauty256
 set title
 set titleold=
 set number
@@ -190,6 +192,7 @@ map <C-q> <C-w>q
 
 map <leader>/ :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
+map <leader>t :NERDTreeToggle<CR>
  
 nnoremap Y y$
 
