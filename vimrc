@@ -232,6 +232,7 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " set filetype
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
+autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead *.js.php set filetype=javascript
 
 " highlight VCS conflicts
