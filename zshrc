@@ -12,6 +12,4 @@ PATH=$HOME/Code/bin:$PATH                         # My Go
 PATH=$HOME/Code/work/virb/scripts/tools/bin:$PATH # Virb tools
 PATH=$HOME/.bin:$PATH                             # My tools
 
-TERM=screen-256color
-
 for file ($ZSH/modules/**/*.zsh) source $file

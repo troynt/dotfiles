@@ -13,6 +13,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'noah/vim256-color'
 Bundle 'ack.vim'
 Bundle 'ScrollColors'
+Bundle 'danro/rename.vim'
 
 filetype plugin on
 
@@ -21,7 +22,7 @@ filetype plugin on
 " ---------------------------------
 
 syntax on
-colorscheme beauty256
+colorscheme lucius
 set title
 set titleold=
 set number
