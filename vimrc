@@ -27,7 +27,6 @@ set title
 set titleold=
 set nonumber
 set nolist
-set lazyredraw
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
 set mouse=a
@@ -231,8 +230,6 @@ autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead *.js.php set filetype=javascript
-
-" highlight VCS conflicts
 autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.md set filetype=mkd
 autocmd BufRead *.mkd set filetype=mkd
