@@ -22,10 +22,10 @@ filetype plugin on
 " ---------------------------------
 
 syntax on
-colorscheme lucius
+colorscheme desert256
 set title
 set titleold=
-set number
+set nonumber
 set nolist
 set lazyredraw
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
