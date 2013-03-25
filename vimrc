@@ -1,18 +1,32 @@
 set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
+Bundle 'noah/vim256-color'
+Bundle 'ack.vim'
+Bundle 'ScrollColors'
+Bundle 'danro/rename.vim'
+
 filetype plugin on
-call pathogen#runtime_append_all_bundles()
 
 " ---------------------------------
 " UI
 " ---------------------------------
 
 syntax on
-colorscheme lodestone
+colorscheme desert256
 set title
 set titleold=
-set number
+set nonumber
 set nolist
-set lazyredraw
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
 set mouse=a
@@ -71,13 +85,6 @@ set statusline+=%{strlen(&ft)?&ft:'none'} "
 set statusline+=]
 
 set fo-=r
-
-if has("gui_running")
-  set guioptions=egmrt
-  set lines=40 columns=120
-  set go-=T
-  set go-=r
-endif
 
 " resize splits when window is resized
 au VimResized * exe "normal! \<c-w>="
@@ -178,6 +185,7 @@ map <C-q> <C-w>q
 
 map <leader>/ :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
+map <leader>t :NERDTreeToggle<CR>
  
 nnoremap Y y$
 
@@ -220,10 +228,8 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " set filetype
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
+autocmd BufRead,BufNewFile *.scss set filetype=scss
 autocmd BufRead *.js.php set filetype=javascript
-
-" highlight VCS conflicts
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.md set filetype=mkd
 autocmd BufRead *.mkd set filetype=mkd
