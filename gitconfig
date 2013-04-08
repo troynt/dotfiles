@@ -24,6 +24,8 @@
   staged = diff --cached
   unstaged = diff
   track = checkout -t
+  ours = '!f() { git checkout --ours $@ && git add $@; }; f'
+  theirs = '!f() { git checkout --theirs $@ && git add $@; }; f'
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
@@ -40,3 +42,5 @@
   insteadOf = "heroku:"
 [mergetool]
   keepBackup = true
+[diff]
+	algorithm = patience
