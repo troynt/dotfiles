@@ -14,6 +14,7 @@ Bundle 'noah/vim256-color'
 Bundle 'ack.vim'
 Bundle 'ScrollColors'
 Bundle 'danro/rename.vim'
+Bundle 'jnwhiteh/vim-golang'
 
 filetype plugin on
 
