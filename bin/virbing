@@ -4,8 +4,8 @@ NAME="virb-station"
 SOCKET="tmux-socket"
 
 if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
-    VIRB_DIR=$HOME/Code/work/virb
-    BASE_DIR=$HOME/Code/work/base
+    VIRB_DIR=$HOME/Code/Work/virb
+    BASE_DIR=$HOME/Code/Work/base
     VIRBOT_DIR=$HOME/Code/src/github.com/virb/virbot
 
     # Virb code

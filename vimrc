@@ -23,7 +23,7 @@ filetype plugin on
 " ---------------------------------
 
 syntax on
-colorscheme desert256
+colorscheme zenburn
 set title
 set titleold=
 set nonumber
