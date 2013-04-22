@@ -1,1 +1,0 @@
-.././submodules/Simple256/colors/simple256.vim

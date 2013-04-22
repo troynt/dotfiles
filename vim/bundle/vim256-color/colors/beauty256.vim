@@ -1,1 +1,0 @@
-.././submodules/beauty256/colors/beauty256.vim

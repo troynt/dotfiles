@@ -1,1 +1,0 @@
-.././submodules/southernlights/colors/southernlights.vim

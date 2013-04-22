@@ -1,1 +1,0 @@
-.././submodules/256-grayvim/colors/256-grayvim.vim

@@ -1,1 +1,0 @@
-.././submodules/pink/colors/pink.vim
