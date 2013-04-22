@@ -23,7 +23,7 @@ filetype plugin on
 " ---------------------------------
 
 syntax on
-colorscheme zenburn
+colorscheme inkpot
 set title
 set titleold=
 set nonumber
@@ -75,6 +75,7 @@ set ttimeoutlen=20
 set notimeout
 if system('uname') =~ 'Linux'
   set clipboard=unnamed
+  set guioptions-=T
 endif
 
 set laststatus=2

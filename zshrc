@@ -1,5 +1,9 @@
 ZSH=$HOME/.zsh
-EDITOR=vim
+if [[ $(uname) == 'Darwin' ]]; then
+    EDITOR=vim
+else
+    EDITOR=gvim
+fi
 
 PATH=/usr/local/bin:/usr/local/sbin:$PATH         # Machine
 PATH=/usr/local/share/python:$PATH                # Python
