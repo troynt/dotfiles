@@ -22,8 +22,10 @@ filetype plugin on
 " UI
 " ---------------------------------
 
+set t_Co=256
 syntax on
-colorscheme inkpot
+colorscheme zenburn
+set background=light
 set title
 set titleold=
 set nonumber
@@ -220,7 +222,7 @@ let g:syntastic_disabled_filetypes = ['html']
 
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|\.gif$\|\.png$' }
 
 " ---------------------------------
