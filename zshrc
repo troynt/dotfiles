@@ -13,3 +13,5 @@ PATH=$HOME/Code/Work/virb/scripts/tools/bin:$PATH # Virb tools
 PATH=$HOME/.bin:$PATH                             # My tools
 
 for file ($ZSH/modules/**/*.zsh) source $file
+
+TERM=screen-256color

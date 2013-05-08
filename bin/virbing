@@ -6,7 +6,7 @@ SOCKET="tmux-socket"
 if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
     VIRB_DIR=$HOME/Code/Work/virb
     BASE_DIR=$HOME/Code/Work/base
-    VIRBOT_DIR=$HOME/Code/src/github.com/virb/virbot
+    VIRBOT_DIR=$HOME/Code/Work/virbot
 
     # Virb code
     cd $VIRB_DIR
@@ -17,18 +17,14 @@ if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
     tmux -L $SOCKET set-option -t $NAME default-path $BASE_DIR
     tmux -L $SOCKET new-window -t $NAME:2 -n base
 
-    # Virbot
-    tmux -L $SOCKET set-option -t $NAME default-path $VIRBOT_DIR
-    tmux -L $SOCKET new-window -t $NAME:3 -n virbot
-
-    # Virtual Machine window
+    # Virtual Machine
     tmux -L $SOCKET set-option -t $NAME default-path $VIRB_DIR
     tmux -L $SOCKET new-window -t $NAME:4 -n vm
     tmux -L $SOCKET send-keys -t $NAME:4 "vagrant up && ssh virbvm" C-m
 
-    # VPN
-    tmux -L $SOCKET set-option -t $NAME default-path $VIRB_DIR
-    tmux -L $SOCKET new-window -t $NAME:5 -n vpn
+    # Virbot
+    tmux -L $SOCKET set-option -t $NAME default-path $VIRBOT_DIR
+    tmux -L $SOCKET new-window -t $NAME:3 -n virbot
 
     tmux -L $SOCKET select-window -t $NAME:1
 fi
