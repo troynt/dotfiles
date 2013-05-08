@@ -24,7 +24,7 @@ filetype plugin on
 
 set t_Co=256
 syntax on
-colorscheme zenburn
+colorscheme inkpot
 set background=light
 set title
 set titleold=
