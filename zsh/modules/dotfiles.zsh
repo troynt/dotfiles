@@ -1,1 +1,1 @@
-alias reload!='. ~/.zshrc && echo "Dotfiles reloaded!"'
+alias reload!='exec $SHELL -l && echo "Dotfiles reloaded!"'
