@@ -18,7 +18,7 @@
 [alias]
   lol = log --oneline --graph --decorate
   human = name-rev --name-only
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 
 [url "troynt@git.drupal.org:project/"]
   insteadOf = "dh:"
@@ -37,20 +37,6 @@
 [url "git@heroku.com:"]
   insteadOf = "heroku:"
 [merge]
-  summary = true
-  tool = "p4merge" 
-[mergetool "p4merge"]
-  cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED" 
-  trustExitCode = false
-  keepTemporaries = false
-  keepBackup = false
-[mergetool "opendiff"]
-  cmd = opendiff "$BASE" "$LOCAL" -ancestor "$REMOTE" -merge "$MERGED" 
-[difftool "sourcetree"]
-	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-	trustExitCode = true
-[mergetool]
-  keepBackup = true
+  tool = "meld"
+[pull]
+  rebase = true

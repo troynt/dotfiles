@@ -108,17 +108,16 @@ set wildmenu
 set complete=.,t
 "set wildignore=*~
 
-if has("gui")
-    " C-Space seems to work under gVim on both Linux and win32
-    inoremap <C-Space> <C-n>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <C-n>
-  else
-  " I have no idea of the name of Ctrl-Space elsewhere
-  endif
-endif
-
+"if has("gui")
+"    " C-Space seems to work under gVim on both Linux and win32
+"    inoremap <C-Space> <C-n>
+"else " no gui
+"  if has("unix")
+"    inoremap <Nul> <C-n>
+"  else
+"  " I have no idea of the name of Ctrl-Space elsewhere
+"  endif
+"endif
 
 set hidden
 set nobackup
@@ -228,7 +227,6 @@ map <leader>r :FufJumpList<CR>
 map <leader>F :FufFile<CR>
 map <leader>/ :FufFile **/<CR>
 map <leader>f :FufFileWithCurrentBufferDir<CR>
-map <leader>d :FufDir<CR>
 map <leader>b :FufBuffer<CR>
 
 map <leader>t :NERDTree<CR>
@@ -296,6 +294,7 @@ nnoremap <leader>! :Shell
 " Plugins
 " ---------------------------------
 "let g:dwm_map_keys = 0
+"
 
 let g:fuf_file_exclude = '\v\.DS_Store|\.bak|\.swp'
 let g:statline_show_encoding = 0
@@ -328,9 +327,12 @@ augroup drupal
 augroup END
 
 " set filetype
-autocmd BufRead,BufNewFile *.erb   set ft=html.eruby.eruby-rails
+autocmd BufRead,BufNewFile *.go         set ft=go
+autocmd BufRead,BufNewFile Cakefile     set ft=coffee
+autocmd BufRead,BufNewFile *.rl         set ft=ragel
+autocmd BufRead,BufNewFile *.erb        set ft=html.eruby.eruby-rails
 autocmd BufRead,BufNewFile *.jst.coffee set ft=html
-autocmd BufRead,BufNewFile *.coffee set ft=coffee
+autocmd BufRead,BufNewFile *.coffee     set ft=coffee
 autocmd BufRead,BufNewFile *.css.php    set ft=css
 autocmd BufRead,BufNewFile *.less       set ft=less
 autocmd BufRead,BufNewFile *.js.php     set ft=javascript
