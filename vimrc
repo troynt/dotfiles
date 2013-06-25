@@ -254,7 +254,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags ts=4 sts=4 sw=4 expan
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP iskeyword-=- ts=4 sts=4 sw=4 keywordprg=pman expandtab
 autocmd FileType c set omnifunc=ccomplete#Complete ts=4 sts=4 sw=4 expandtab
 autocmd FileType bash,zsh,sh set ts=4 sts=4 sw=4 expandtab
-autocmd FileType go set ts=4 sts=4 sw=4 expandtab
+autocmd FileType go set ts=4 sts=4 sw=4 noexpandtab
 
 autocmd Filetype gitcommit set tw=68 spell
 
