@@ -15,6 +15,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'ScrollColors'
 Bundle 'danro/rename.vim'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'tsaleh/vim-align'
 
 filetype plugin on
 
@@ -24,7 +25,7 @@ filetype plugin on
 
 set t_Co=256
 syntax on
-colorscheme inkpot
+colorscheme jellybeans
 set background=light
 set title
 set titleold=
