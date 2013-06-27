@@ -1,46 +1,39 @@
-[user]
-  name = Brett Buddin
-  email = brett@brettbuddin.us
-[branch]
-  autosetuprebase = always
-[github]
-  user = brettbuddin
 [core]
-  excludesfile = /Users/brettbuddin/.gitignore
-  editor = vim
+    excludesfile = /Users/brettbuddin/.gitignore
+    editor       = vim
+[user]
+    name  = Brett Buddin
+    email = brett@buddin.us
+[github]
+    user = brettbuddin
 [color]
-  branch = auto
-  diff = auto
-  status = auto
-  ui = true
-[push]
-  default = current
+    branch = auto
+    diff   = auto
+    status = auto
+    ui     = true
 [help]
-  autocorrect = 1
-[alias]
-  lol = log --oneline --graph --decorate
-  human = name-rev --name-only
-  unstage = reset HEAD
-  staged = diff --cached
-  unstaged = diff
-  track = checkout -t
-  ours = '!f() { git checkout --ours $@ && git add $@; }; f'
-  theirs = '!f() { git checkout --theirs $@ && git add $@; }; f'
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
-[url "git://github.com/"]
-  insteadOf = "github:"
-[url "git@gist.github.com:"]
-  insteadOf = "gst:"
-  pushInsteadOf = "gist:"
-  pushInsteadOf = "git://gist.github.com/"
-[url "git://gist.github.com/"]
-  insteadOf = "gist:"
-[url "git@heroku.com:"]
-  insteadOf = "heroku:"
+    autocorrect = 1
+
 [mergetool]
-  keepBackup = true
+    keepBackup = true
 [diff]
-	algorithm = patience
+    algorithm = patience
+
+[branch]
+    autosetuprebase = always
+[push]
+    default = current
+[alias]
+    lol            = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date = relative
+    human          = name-rev --name-only
+    stage          = add
+    unstage        = reset HEAD
+    staged         = diff --cached
+    unstaged       = diff
+    stat           = diff --stat -r
+    track          = checkout -t
+    ours           = '!f() { git checkout --ours $@ && git add $@; }; f'
+    theirs         = '!f() { git checkout --theirs $@ && git add $@; }; f'
+    edit-conflicts = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
+    prune-remote   = !git remote | xargs -n 1 git remote prune
+    new-commits    = !sh -c 'git log $1@{1}..$1@{0} "$@"'
