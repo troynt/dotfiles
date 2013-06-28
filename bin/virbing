@@ -36,6 +36,7 @@ if ! $(tmux -L $SOCKET has-session -t $NAME &> /dev/null); then
     tmux -L $SOCKET set-option -t $NAME default-path $DOTFILES_DIR
     tmux -L $SOCKET new-window -t $NAME:6 -n dotfiles
 
+    tmux -L $SOCKET set-option -t $NAME default-path "$PWD"
     tmux -L $SOCKET select-window -t $NAME:1
 fi
 
