@@ -24,15 +24,18 @@
 [push]
     default = current
 [alias]
-    lol            = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    human          = name-rev --name-only
-    undo           = reset --soft HEAD^
+    ll             = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ls             = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    short          = status -s
     stage          = add
     unstage        = reset HEAD
     staged         = diff --cached
     unstaged       = diff
     stat           = diff --stat -r
+    undo           = reset --soft HEAD^
     track          = checkout -t
+
+    human          = name-rev --name-only
     ours           = '!f() { git checkout --ours $@ && git add $@; }; f'
     theirs         = '!f() { git checkout --theirs $@ && git add $@; }; f'
     conflicts      = "!f() { git ls-files -u | awk '{print $4}' | sort -u; }; f"
