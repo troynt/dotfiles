@@ -24,8 +24,9 @@
 [push]
     default = current
 [alias]
-    lol            = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date = relative
+    lol            = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     human          = name-rev --name-only
+    undo           = reset --soft HEAD^
     stage          = add
     unstage        = reset HEAD
     staged         = diff --cached
@@ -34,6 +35,7 @@
     track          = checkout -t
     ours           = '!f() { git checkout --ours $@ && git add $@; }; f'
     theirs         = '!f() { git checkout --theirs $@ && git add $@; }; f'
+    conflicts      = "!f() { git ls-files -u | awk '{print $4}' | sort -u; }; f"
     edit-conflicts = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
     prune-remote   = !git remote | xargs -n 1 git remote prune
     new-commits    = !sh -c 'git log $1@{1}..$1@{0} "$@"'
