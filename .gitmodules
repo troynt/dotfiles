@@ -6,7 +6,7 @@
 	url = git@github.com:kien/ctrlp.vim.git
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
-	url = git@github.com:scrooloose/syntastic.git
+	url = git@github.com:scrooloose/nerdcommenter.git
 [submodule "vim/bundle/rename"]
 	path = vim/bundle/rename
 	url = git@github.com:danro/rename.vim.git
