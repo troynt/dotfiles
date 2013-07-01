@@ -25,3 +25,6 @@
 [submodule "vim/bundle/colorthemes"]
 	path = vim/bundle/colorthemes
 	url = git@github.com:noah/vim256-color.git
+[submodule "vim/bundle/yankring"]
+	path = vim/bundle/yankring
+	url = git@github.com:vim-scripts/YankRing.vim.git
