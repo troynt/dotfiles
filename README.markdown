@@ -4,7 +4,7 @@
 
 To install:
 
-    $ git clone git://github.com/brettbuddin/dotfiles.git ~/.dotfiles
+    $ git clone --recursive git://github.com/brettbuddin/dotfiles.git ~/.dotfiles
     $ ~/.dotfiles/scripts/install.sh
 
 The installer will **never** delete a file from your $HOME directory. If it encounters a file that isn't a symlink, it lets you handle the situation.
