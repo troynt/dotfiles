@@ -1,22 +1,5 @@
 set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'noah/vim256-color'
-Bundle 'mileszs/ack.vim'
-Bundle 'ScrollColors'
-Bundle 'danro/rename.vim'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'tsaleh/vim-align'
-
+execute pathogen#infect()
 filetype plugin on
 
 " ---------------------------------
