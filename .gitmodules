@@ -1,0 +1,27 @@
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = git@github.com:mileszs/ack.vim.git
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
+	url = git@github.com:kien/ctrlp.vim.git
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = git@github.com:scrooloose/syntastic.git
+[submodule "vim/bundle/rename"]
+	path = vim/bundle/rename
+	url = git@github.com:danro/rename.vim.git
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = git@github.com:scrooloose/syntastic.git
+[submodule "vim/bundle/align"]
+	path = vim/bundle/align
+	url = git@github.com:tsaleh/vim-align.git
+[submodule "vim/bundle/fugitive"]
+	path = vim/bundle/fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule "vim/bundle/golang"]
+	path = vim/bundle/golang
+	url = git@github.com:jnwhiteh/vim-golang.git
+[submodule "vim/bundle/colorthemes"]
+	path = vim/bundle/colorthemes
+	url = git@github.com:noah/vim256-color.git
