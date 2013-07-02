@@ -34,6 +34,7 @@
     stat           = diff --stat -r
     undo           = reset --soft HEAD^
     track          = checkout -t
+    prep           = rebase -i @{upstream}
 
     human          = name-rev --name-only
     ours           = '!f() { git checkout --ours $@ && git add $@; }; f'
