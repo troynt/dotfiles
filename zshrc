@@ -12,6 +12,7 @@ PATH=/opt/tools/android/sdk/platform-tools:$PATH  # Android
 PATH=/usr/local/go/bin:$PATH                      # Go
 PATH=$HOME/Code/bin:$PATH                         # My Go
 PATH=$HOME/Code/Work/virb/scripts/tools/bin:$PATH # Virb tools
+PATH=$HOME/.ansible/bin:$PATH                     # Ansible
 PATH=$HOME/.bin:$PATH                             # My tools
 
 for file ($ZSH/modules/**/*.zsh) source $file
