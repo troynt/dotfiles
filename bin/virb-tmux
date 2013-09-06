@@ -5,10 +5,10 @@ SOCKET_NAME="tmux-socket"
 SOCKET_PATH="/tmp/$SOCKET_NAME"
 
 if ! $(tmux -S $SOCKET_PATH has-session -t $NAME &> /dev/null); then
-    VIRB_DIR=$HOME/Code/Work/virb
-    BASE_DIR=$HOME/Code/Work/base
-    VIRBOT_DIR=$HOME/Code/src/github.com/virb/virbot
-    UTILS_DIR=$HOME/Code/Work/utils/fabric
+    VIRB_DIR=$HOME/Dev/Work/virb
+    BASE_DIR=$HOME/Dev/Work/base
+    VIRBOT_DIR=$HOME/Dev/src/github.com/virb/virbot
+    UTILS_DIR=$HOME/Dev/Work/utils/fabric
     DOTFILES_DIR=$HOME/.dotfiles
 
     # Virb code
