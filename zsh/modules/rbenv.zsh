@@ -1,3 +1,3 @@
-if [ -f $HOME/.rbenv ]; then
+if [ -d $HOME/.rbenv ]; then
     eval "$(rbenv init -)"
 fi
