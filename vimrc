@@ -88,6 +88,7 @@ set wildmode=list:longest,list:full
 set wildignore+=*/.hg,*/.git,*/.svn
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc
+set wildignore+=*.class
 set wildignore+=*.sw?
 set wildignore+=.DS_Store
 
