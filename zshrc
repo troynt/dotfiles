@@ -15,6 +15,8 @@ PATH=$HOME/Dev/Work/virb/scripts/tools/bin:$PATH  # Virb tools
 PATH=$HOME/.ansible/bin:$PATH                     # Ansible
 PATH=$HOME/.bin:$PATH                             # My tools
 
+CLASSPATH=/opt/tools/android/sdk/platforms/android-17/android.jar:$CLASSPATH
+
 for file ($ZSH/modules/**/*.zsh) source $file
 
 TERM=screen-256color

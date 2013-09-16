@@ -8,11 +8,11 @@ filetype plugin on
 
 set t_Co=256
 syntax on
-colorscheme jellybeans
-set background=light
+colorscheme tir_black
+"set background=light
 set title
 set titleold=
-set nonumber
+set number
 set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
@@ -59,6 +59,7 @@ set splitright
 set ttimeout
 set ttimeoutlen=20
 set notimeout
+"set autochdir
 if system('uname') =~ 'Linux'
   set clipboard=unnamed
   set guioptions-=T
@@ -203,6 +204,7 @@ let g:statline_show_encoding = 0
 
 let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
+let g:syntastic_java_javac_config_file_enabled = 1
 
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
