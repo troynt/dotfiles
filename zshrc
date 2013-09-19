@@ -15,7 +15,7 @@ PATH=$HOME/Dev/Work/virb/scripts/tools/bin:$PATH  # Virb tools
 PATH=$HOME/.ansible/bin:$PATH                     # Ansible
 PATH=$HOME/.bin:$PATH                             # My tools
 
-CLASSPATH=/opt/tools/android/sdk/platforms/android-17/android.jar:$CLASSPATH
+ANDROID_SDK=/opt/tools/android/sdk
 
 for file ($ZSH/modules/**/*.zsh) source $file
 
