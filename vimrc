@@ -83,6 +83,8 @@ au VimResized * exe "normal! \<c-w>="
 " Completion
 " ---------------------------------
 
+set tags+=$HOME/.vim/tags/android-17.tags
+
 set completeopt=longest,menuone,preview
 set wildmode=list:longest,list:full
 
@@ -174,6 +176,7 @@ map <C-q> <C-w>q
 
 map <leader>/ :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
+map <leader>. :CtrlPTag<CR>
 map <leader>t :NERDTreeToggle<CR>
  
 nnoremap Y y$
@@ -230,19 +233,20 @@ autocmd BufRead *.sls set filetype=yaml
 autocmd BufRead,BufNewFile *.go set filetype=go
 
 " set completion
-autocmd FileType ruby set omnifunc=rubycomplete#Complete ts=4 sts=2 sw=2 expandtab
-autocmd FileType python set omnifunc=pythoncomplete#Complete ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS ts=4 sts=4 sw=4 expandtab
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete ts=4 sts=2 sw=2 expandtab
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript setlocal nocindent
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
-autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS ts=4 sts=4 sw=4 expandtab
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP iskeyword-=- ts=4 sts=4 sw=4 keywordprg=pman expandtab
-autocmd FileType c set omnifunc=ccomplete#Complete ts=4 sts=4 sw=4 expandtab
-autocmd FileType bash,zsh,sh set ts=4 sts=4 sw=4 expandtab
-autocmd FileType go set ts=4 sts=4 sw=4 noexpandtab
-
-autocmd Filetype gitcommit set tw=68 spell
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
+autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS ts=4 sts=4 sw=4 expandtab
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP iskeyword-=- ts=4 sts=4 sw=4 keywordprg=pman expandtab
+autocmd FileType c setlocal omnifunc=ccomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType bash,zsh,sh setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
+autocmd FileType java setlocal omnifunc=javacomplete#Complete ts=4 sts=4 sw=4 expandtab
+autocmd FileType java setlocal completefunc=javacomplete#CompleteParamsInfo
+autocmd Filetype gitcommit setlocal tw=68 spell
 
 
 " ---------------------------------
