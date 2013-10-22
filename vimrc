@@ -212,6 +212,10 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
 let g:syntastic_java_javac_config_file_enabled = 1
 
+let g:syntastic_mode_map={ 'mode': 'active',
+    \ 'active_filetypes': [],
+    \ 'passive_filetypes': ['html'] }
+
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_bottom = 1
