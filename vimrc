@@ -9,7 +9,6 @@ filetype plugin on
 set t_Co=256
 syntax on
 colorscheme molokai
-set background=dark
 set title
 set titleold=
 set number
@@ -59,10 +58,7 @@ set splitright
 set ttimeout
 set ttimeoutlen=20
 set notimeout
-if system('uname') =~ 'Linux'
-  set clipboard=unnamed
-  set guioptions-=T
-endif
+set clipboard=unnamed
 
 set laststatus=2
 set statusline+=%f\ [%{fugitive#head()}]
