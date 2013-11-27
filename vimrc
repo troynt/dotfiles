@@ -98,9 +98,9 @@ set complete=.,t
 " ---------------------------------
 
 set hidden
-set backup
+set nobackup
 set nowritebackup
-set noswapfile
+set swapfile
 
 if has('persistent_undo')
     set undofile
