@@ -66,12 +66,11 @@ if system('uname') =~ 'Linux'
 endif
 
 set laststatus=2
-set statusline+=%f
+set statusline+=%f\ [%{fugitive#head()}]
 set statusline+=%=
 set statusline+=%{SyntasticStatuslineFlag()}%*
-set statusline+=\ [
-set statusline+=%{strlen(&ft)?&ft:'none'} "
-set statusline+=]
+set statusline+=\ [%{strlen(&ft)?&ft:'none'}]
+set statusline+=\ [%l,%c]\ %P
 
 set fo-=r
 
