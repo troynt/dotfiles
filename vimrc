@@ -98,15 +98,15 @@ set complete=.,t
 " ---------------------------------
 
 set hidden
-set nobackup
+set backup
 set nowritebackup
 set noswapfile
 
-if has("undofile")
-  set undofile
-  set undodir=~/.undo
-end
-
+if has('persistent_undo')
+    set undofile
+    set undolevels=1000
+    set undoreload=1000
+endif
 
 " ---------------------------------
 " Mappings
