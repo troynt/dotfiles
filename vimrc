@@ -102,11 +102,6 @@ set nobackup
 set nowritebackup
 set swapfile
 
-if has('persistent_undo')
-    set undofile
-    set undolevels=1000
-    set undoreload=1000
-endif
 
 " ---------------------------------
 " Mappings
