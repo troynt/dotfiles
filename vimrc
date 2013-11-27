@@ -9,6 +9,7 @@ filetype plugin on
 set t_Co=256
 syntax on
 colorscheme molokai
+set background=dark
 set title
 set titleold=
 set number
