@@ -8,8 +8,7 @@ filetype plugin on
 
 set t_Co=256
 syntax on
-colorscheme tir_black
-"set background=light
+colorscheme molokai
 set title
 set titleold=
 set number
@@ -59,7 +58,6 @@ set splitright
 set ttimeout
 set ttimeoutlen=20
 set notimeout
-"set autochdir
 if system('uname') =~ 'Linux'
   set clipboard=unnamed
   set guioptions-=T
@@ -88,7 +86,7 @@ set completeopt=longest,menuone,preview
 set wildmode=list:longest,list:full
 
 set wildignore+=*/.hg,*/.git,*/.svn
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.fla,*.swf
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc
 set wildignore+=*.class
 set wildignore+=*.sw?
@@ -96,7 +94,6 @@ set wildignore+=.DS_Store
 
 set wildmenu
 set complete=.,t
-"set wildignore=*~
 
 
 " ---------------------------------
@@ -123,18 +120,6 @@ command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
 let mapleader = ","
 nnoremap ; :
 
-" code folding
-nmap <leader>f0 :set foldlevel=0<CR>
-nmap <leader>f1 :set foldlevel=1<CR>
-nmap <leader>f2 :set foldlevel=2<CR>
-nmap <leader>f3 :set foldlevel=3<CR>
-nmap <leader>f4 :set foldlevel=4<CR>
-nmap <leader>f5 :set foldlevel=5<CR>
-nmap <leader>f6 :set foldlevel=6<CR>
-nmap <leader>f7 :set foldlevel=7<CR>
-nmap <leader>f8 :set foldlevel=8<CR>
-nmap <leader>f9 :set foldlevel=9<CR>
-
 " cd to current file's directory
 nmap <leader>cd %:p:h
 
@@ -146,10 +131,10 @@ function! MapToggle(key, opt)
 endfunction
 command! -nargs=+ MapToggle call MapToggle(<f-args>)
 
-MapToggle <F1> hlsearch
-MapToggle <F2> wrap
-MapToggle <F3> number
-MapToggle <F4> paste
+MapToggle <F5> hlsearch
+MapToggle <F6> wrap
+MapToggle <F7> number
+MapToggle <F8> paste
 
 " new line creation with return
 map <S-Enter> O<ESC>
@@ -177,14 +162,12 @@ map <C-k> <C-w>k
 map <C-q> <C-w>q
 
 map <leader>/ :CtrlP<CR>
+map <leader>f :CtrlPCurFile<CR>
 map <leader>b :CtrlPBuffer<CR>
 map <leader>. :CtrlPTag<CR>
 map <leader>t :NERDTreeToggle<CR>
  
 nnoremap Y y$
-
-" syncit command for local VM work
-map <C-U> :!syncit<CR>
 
 " insert mode completion
 inoremap <C-L> <C-X><C-L>
