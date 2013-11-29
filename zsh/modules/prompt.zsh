@@ -38,11 +38,11 @@ function git_prompt_dirty {
     else
         if [[ $what == 'nothing to commit, working directory clean' ]]
         then
-            echo ":%{$fg[green]%}$(git_prompt_branch)%{$reset_color%}%{$fg[cyan]%}"
+            echo "[%{$fg[green]%}$(git_prompt_branch)%{$reset_color%}%{$fg[cyan]%}]"
         else
-            echo ":%{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%}%{$fg[cyan]%}"
+            echo "[%{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%}%{$fg[cyan]%}]"
         fi
     fi
 }
 
-PROMPT=$'%{$fg[cyan]%}%c$(git_prompt_dirty)%{$reset_color%}\$ '
+PROMPT=$'%{$fg[cyan]%}%c$(git_prompt_dirty)%{$reset_color%} '
