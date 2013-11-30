@@ -250,3 +250,7 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+if filereadable(expand($HOME . "/.vimrc.local"))
+    source $HOME/.vimrc.local
+endif
