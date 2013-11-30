@@ -11,7 +11,7 @@ syntax on
 colorscheme molokai
 set title
 set titleold=
-set number
+set nonumber
 set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
