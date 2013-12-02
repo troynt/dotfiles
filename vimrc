@@ -11,7 +11,7 @@ syntax on
 colorscheme molokai
 set title
 set titleold=
-set number
+set nonumber
 set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set visualbell t_vb=
@@ -250,3 +250,7 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+if filereadable(expand($HOME . "/.vimrc.local"))
+    source $HOME/.vimrc.local
+endif
