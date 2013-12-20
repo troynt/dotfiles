@@ -17,6 +17,10 @@ PATH=$HOME/.bin:$PATH                             # My tools
 
 ANDROID_SDK=/opt/tools/android/sdk
 
+if [ -f $HOME/.zshrc.local ]; then
+    source $HOME/.zshrc.local
+fi
+
 for file ($ZSH/modules/**/*.zsh) source $file
 
 TERM=screen-256color
