@@ -122,10 +122,10 @@ function! MapToggle(key, opt)
 endfunction
 command! -nargs=+ MapToggle call MapToggle(<f-args>)
 
-MapToggle <F5> hlsearch
-MapToggle <F6> wrap
-MapToggle <F7> number
-MapToggle <F8> paste
+MapToggle <F2> hlsearch
+MapToggle <F3> wrap
+MapToggle <F4> number
+MapToggle <F5> paste
 
 " new line creation with return
 map <S-Enter> O<ESC>
@@ -236,15 +236,6 @@ if system('uname') =~ 'Darwin'
     \ '/opt/local/bin:/opt/local/sbin:' .
     \ $PATH
 endif
-
-" Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
 
 if filereadable(expand($HOME . "/.vimrc.local"))
     source $HOME/.vimrc.local
