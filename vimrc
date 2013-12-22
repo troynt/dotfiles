@@ -58,7 +58,8 @@ set splitright
 set ttimeout
 set ttimeoutlen=20
 set notimeout
-"set clipboard=unnamed
+set clipboard=unnamed
+set paste
 
 set laststatus=2
 set statusline+=%f\ [%{fugitive#head()}]
