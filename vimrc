@@ -97,9 +97,12 @@ set complete=.,t
 " ---------------------------------
 
 set hidden
-set nobackup
-set nowritebackup
-set swapfile
+set dir=~/.vim/tmp/swap/
+set backupdir=~/.vim/tmp/backup/
+set undodir=~/.vim/tmp/undo/
+call system("mkdir -p ~/.vim/tmp/swap")
+call system("mkdir -p ~/.vim/tmp/backup")
+call system("mkdir -p ~/.vim/tmp/undo")
 
 
 " ---------------------------------
