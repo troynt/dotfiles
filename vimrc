@@ -1,6 +1,6 @@
 set nocompatible
 execute pathogen#infect()
-filetype plugin on
+filetype plugin indent on
 
 " ---------------------------------
 " UI
@@ -215,19 +215,15 @@ autocmd BufRead *.sls set filetype=yaml
 autocmd BufRead,BufNewFile *.go set filetype=go
 
 " set completion
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete ts=4 sts=2 sw=2 expandtab
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript setlocal nocindent
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
-autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS ts=4 sts=4 sw=4 expandtab
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags ts=4 sts=4 sw=4 expandtab
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP iskeyword-=- ts=4 sts=4 sw=4 keywordprg=pman expandtab
-autocmd FileType c setlocal omnifunc=ccomplete#Complete ts=4 sts=4 sw=4 expandtab
-autocmd FileType bash,zsh,sh setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType java setlocal omnifunc=javacomplete#Complete ts=4 sts=4 sw=4 expandtab
-autocmd FileType java setlocal completefunc=javacomplete#CompleteParamsInfo
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType javascript setlocal nocindent omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP iskeyword-=- keywordprg=pman
+autocmd FileType c setlocal omnifunc=ccomplete#Complete
+autocmd FileType java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
 autocmd Filetype gitcommit setlocal tw=68 spell
 
 
