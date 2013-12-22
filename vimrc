@@ -78,8 +78,6 @@ au VimResized * exe "normal! \<c-w>="
 " Completion
 " ---------------------------------
 
-set tags+=$HOME/.vim/tags/android-17.tags
-
 set completeopt=longest,menuone,preview
 set wildmode=list:longest,list:full
 
