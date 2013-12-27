@@ -13,36 +13,26 @@ LISTMAX=0
 
 PS1="%n@%m:%~%# "
 
-function machine_name {
-    [ -f ~/.machine_name ] && cat ~/.machine_name || hostname -s
-}
-
-function git_prompt_unpushed {
-    git cherry -v origin/$(git_prompt_branch) 2>/dev/null
-}
-
-function git_prompt_branch {
-    echo -n "$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})"
-}
-
-function git_prompt_current_ref {
-    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-    echo -n "${ref}"
-}
-
 function git_prompt_dirty {
-    what=$(git status 2>/dev/null | tail -n 1)
-    if [[ $what == '' ]]
+    local git_status=''
+
+    git_status=$(command git status -s 2>/dev/null | tail -n1)
+    if [[ -n $git_status ]]
     then
-        echo ''
+        echo "%{$fg[yellow]%}"
     else
-        if [[ $what == 'nothing to commit, working directory clean' ]]
-        then
-            echo "[%{$fg[green]%}$(git_prompt_branch)%{$reset_color%}%{$fg[cyan]%}]"
-        else
-            echo "[%{$fg[yellow]%}$(git_prompt_branch)%{$reset_color%}%{$fg[cyan]%}]"
-        fi
+        echo "%{$fg[green]%}"
     fi
 }
 
-PROMPT=$'%{$fg[cyan]%}%c$(git_prompt_dirty)%{$reset_color%} '
+function git_prompt_info {
+    local ref=''
+
+    ref="$(command git symbolic-ref HEAD 2> /dev/null)" \
+    || ref=$(command git rev-parse --short HEAD 2> /dev/null) \
+    || return
+
+    echo -n "$(git_prompt_dirty)(${ref#refs/heads/})"
+}
+
+PROMPT=$'%{$fg[cyan]%}%c$(git_prompt_info)%{$reset_color%} '
