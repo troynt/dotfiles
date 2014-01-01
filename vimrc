@@ -6,72 +6,56 @@ filetype plugin indent on
 " UI
 " ---------------------------------
 
+set encoding=utf-8
 set t_Co=256
 syntax on
 colorscheme molokai
+set mouse=a
+set visualbell t_vb=
 set title
 set titleold=
+
+" Lines
 set nonumber
 set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set visualbell t_vb=
-set mouse=a
-set showcmd
+set noshowcmd
 set showmode
-set ch=1
+set linespace=0
+
+" Searching
+set gdefault
+set ignorecase
+set smartcase
 set grepprg=ack
 set grepformat=%f:%l:%m
-set binary
+set iskeyword+=_,$,@,%,#,-
+set hlsearch
+set incsearch
+
+" Indentation
 set autoindent
-set copyindent
-set smartindent
-set smarttab
-set guicursor=a:blinkon0
-set nowrap
+set preserveindent
+set shiftround
+set nosmartindent
 set backspace=indent,eol,start
-set nospell
-set linespace=0
+set expandtab
 set tabstop=4 
 set shiftwidth=4
 set softtabstop=4
-set shiftround
-set expandtab
-set nosmarttab
-set formatoptions=1
+
+" Wrapping
+set nowrap
 set linebreak
 set breakat=\ |@-+;:,./?^I
-set virtualedit=block
-set isk+=_,$,@,%,#,-
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,latin1,default
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-set gdefault
-set foldenable
-set nostartofline
-set scrolljump=5
-set scrolloff=3
-set splitbelow
-set splitright
-set ttimeout
-set ttimeoutlen=20
-set notimeout
-"set clipboard=unnamed
-set paste
 
+" Status line
 set laststatus=2
 set statusline+=%f\ [%{fugitive#head()}]
 set statusline+=%=
 set statusline+=%{SyntasticStatuslineFlag()}%*
 set statusline+=\ [%{strlen(&ft)?&ft:'none'}]
 set statusline+=\ [%l,%c]\ %P
-
-set fo-=r
-
-" resize splits when window is resized
-au VimResized * exe "normal! \<c-w>="
 
 
 " ---------------------------------
@@ -108,7 +92,7 @@ call system("mkdir -p ~/.vim/tmp/undo")
 " ---------------------------------
 " Mappings
 " ---------------------------------
-"
+
 command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
 
 let mapleader = ","
@@ -138,16 +122,6 @@ map <Enter> o<ESC>
 vnoremap < <gv
 vnoremap > >gv
 
-" window splitting
-nmap <leader>swh :topleft vnew<CR>
-nmap <leader>swl :botright vnew<CR>
-nmap <leader>swk :topleft new<CR>
-nmap <leader>swj :botright new<CR>
-nmap <leader>sh :leftabove vnew<CR>
-nmap <leader>sl :rightbelow vnew<CR>
-nmap <leader>sk :leftabove new<CR>
-nmap <leader>sj :rightbelow new<CR>
-
 " window movement
 map <C-h> <C-w>h
 map <C-l> <C-w>l
@@ -158,8 +132,6 @@ map <C-q> <C-w>q
 map <leader>/ :CtrlP<CR>
 map <leader>f :CtrlPCurFile<CR>
 map <leader>b :CtrlPBuffer<CR>
-map <leader>. :CtrlPTag<CR>
-map <leader>t :NERDTreeToggle<CR>
  
 nnoremap Y y$
 
@@ -170,8 +142,7 @@ inoremap <C-F> <C-X><C-F>
 " quick access to ack
 map <leader>a :Ack 
 
-" Ex Mode is annoying. 
-" Use this for formatting instead.
+" Ex Mode is annoying.  " Use this for formatting instead.
 map Q gq
 
 " Save even if we forgot to open the file with sudo
@@ -201,7 +172,10 @@ let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|
 " Auto Commands
 " ---------------------------------
 
-" set filetype
+" Resize splits when window is resized
+au VimResized * exe "normal! \<c-w>="
+
+" Filetype
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead,BufNewFile *.scss set filetype=scss
@@ -215,7 +189,7 @@ autocmd BufRead *.as set filetype=actionscript
 autocmd BufRead *.sls set filetype=yaml
 autocmd BufRead,BufNewFile *.go set filetype=go
 
-" set completion
+" Completion
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType javascript setlocal nocindent omnifunc=javascriptcomplete#CompleteJS
@@ -243,3 +217,5 @@ endif
 if filereadable(expand($HOME . "/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
+
+set autoindent?
