@@ -28,7 +28,7 @@ function git_prompt_dirty {
 function git_prompt_info {
     local ref=''
 
-    ref="$(command git symbolic-ref HEAD 2> /dev/null)" \
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) \
     || ref=$(command git rev-parse --short HEAD 2> /dev/null) \
     || return
 
