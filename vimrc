@@ -57,6 +57,10 @@ set statusline+=%{SyntasticStatuslineFlag()}%*
 set statusline+=\ [%{strlen(&ft)?&ft:'none'}]
 set statusline+=\ [%l,%c]\ %P
 
+" Undo
+set undofile
+set undoreload=10000
+
 
 " ---------------------------------
 " Completion
@@ -81,6 +85,7 @@ set complete=.,t
 " ---------------------------------
 
 set hidden
+set noswapfile
 set dir=~/.vim/tmp/swap/
 set backupdir=~/.vim/tmp/backup/
 set undodir=~/.vim/tmp/undo/
@@ -107,9 +112,19 @@ nnoremap <F3> :set wrap!<cr>
 nnoremap <F4> :set number!<cr>
 nnoremap <F5> :set paste!<cr>
 
+" sane movement
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
 " indentation
 vnoremap < <gv
 vnoremap > >gv
+
+" select all
+nnoremap vaa ggvGg_
+nnoremap Vaa ggVG
 
 " window movement
 noremap <C-h> <C-w>h
@@ -132,8 +147,20 @@ inoremap <C-O> <C-X><C-O>
 " quick access to ack
 noremap <leader>a :Ack 
 
-" Ex Mode is annoying. Use this for formatting instead.
-noremap Q gq
+" formatting
+nnoremap Q gqip
+vnoremap Q gq
+
+" sane regexp for search
+nnoremap / /\v
+vnoremap / /\v
+
+" keep the cursor in place while joining lines
+nnoremap J mzJ`z
+
+" keep search matches in the middle of window
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee > /dev/null %
