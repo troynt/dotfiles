@@ -166,7 +166,7 @@ let g:ctrlp_custom_ignore = {
 " ---------------------------------
 
 " Resize splits when window is resized
-au VimResized * exe "normal! \<c-w>="
+autocmd VimResized * exe "normal! \<c-w>="
 
 " Filetype
 autocmd BufRead *.css.php set filetype=css
