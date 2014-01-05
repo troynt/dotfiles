@@ -199,6 +199,7 @@ autocmd VimResized * exe "normal! \<c-w>="
 autocmd BufRead *.css.php set filetype=css
 autocmd BufRead *.less set filetype=css
 autocmd BufRead,BufNewFile *.scss set filetype=scss
+autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 autocmd BufRead *.js.php set filetype=javascript
 autocmd BufRead *.jsx set filetype=javascript
 autocmd BufRead *.md set filetype=mkd
