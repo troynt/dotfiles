@@ -9,7 +9,7 @@ filetype plugin indent on
 set encoding=utf-8
 set t_Co=256
 syntax on
-colorscheme molokai
+colorscheme solarized
 set mouse=a
 set visualbell t_vb=
 set title
@@ -96,54 +96,44 @@ call system("mkdir -p ~/.vim/tmp/undo")
 command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
 
 let mapleader = ","
+inoremap jk <esc>
 nnoremap ; :
 
 " cd to current file's directory
-nmap <leader>cd %:p:h
+nnoremap <leader>cd %:p:h
 
-" feature toggles
-function! MapToggle(key, opt)
-  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-  exec 'nnoremap '.a:key.' '.cmd
-  exec 'inoremap '.a:key." \<C-O>".cmd
-endfunction
-command! -nargs=+ MapToggle call MapToggle(<f-args>)
-
-MapToggle <F2> hlsearch
-MapToggle <F3> wrap
-MapToggle <F4> number
-MapToggle <F5> paste
-
-" new line creation with return
-map <S-Enter> O<ESC>
-map <Enter> o<ESC>
+nnoremap <F2> :set hlsearch!<cr>
+nnoremap <F3> :set wrap!<cr>
+nnoremap <F4> :set number!<cr>
+nnoremap <F5> :set paste!<cr>
 
 " indentation
 vnoremap < <gv
 vnoremap > >gv
 
 " window movement
-map <C-h> <C-w>h
-map <C-l> <C-w>l
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-q> <C-w>q
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-q> <C-w>q
 
-map <leader>/ :CtrlP<CR>
-map <leader>f :CtrlPCurFile<CR>
-map <leader>b :CtrlPBuffer<CR>
+noremap <leader>/ :CtrlP<CR>
+noremap <leader>f :CtrlPCurFile<CR>
+noremap <leader>b :CtrlPBuffer<CR>
  
 nnoremap Y y$
 
 " insert mode completion
 inoremap <C-L> <C-X><C-L>
 inoremap <C-F> <C-X><C-F>
+inoremap <C-O> <C-X><C-O>
 
 " quick access to ack
-map <leader>a :Ack 
+noremap <leader>a :Ack 
 
-" Ex Mode is annoying.  " Use this for formatting instead.
-map Q gq
+" Ex Mode is annoying. Use this for formatting instead.
+noremap Q gq
 
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee > /dev/null %
@@ -159,14 +149,17 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_disabled_filetypes = ['html']
 let g:syntastic_java_javac_config_file_enabled = 1
 
-let g:syntastic_mode_map={ 'mode': 'active',
+let g:syntastic_mode_map = { 
+    \ 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['html'] }
 
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_bottom = 1
-let g:ctrlp_custom_ignore = { 'file': '\.eot$\|\.woff$\|\.svg$\|\.ttf$\|\.jpg$\|\.gif$\|\.png$' }
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v[\/]\.(git|hg|svn)|vendor$',
+    \ 'file': '\v\.(eot|woff|svg|ttf|jpg|gif|png)$' }
 
 " ---------------------------------
 " Auto Commands
