@@ -194,36 +194,37 @@ let g:ctrlp_custom_ignore = {
 " Auto Commands
 " ---------------------------------
 
-" Resize splits when window is resized
-autocmd VimResized * exe "normal! \<c-w>="
+augroup main
+    " Resize splits when window is resized
+    autocmd VimResized * exe "normal! \<c-w>="
 
-" Filetype
-autocmd BufRead *.css.php set filetype=css
-autocmd BufRead *.less set filetype=css
-autocmd BufRead,BufNewFile *.scss set filetype=scss
-autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-autocmd BufRead *.js.php set filetype=javascript
-autocmd BufRead *.jsx set filetype=javascript
-autocmd BufRead *.md set filetype=mkd
-autocmd BufRead *.mkd set filetype=mkd
-autocmd BufRead *.markdown set filetype=mkd
-autocmd BufRead *.god set filetype=ruby
-autocmd BufRead *.as set filetype=actionscript
-autocmd BufRead *.sls set filetype=yaml
-autocmd BufRead,BufNewFile *.go set filetype=go
+    " Filetype
+    autocmd BufRead *.css.php set filetype=css
+    autocmd BufRead *.less set filetype=css
+    autocmd BufRead,BufNewFile *.scss set filetype=scss
+    autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
+    autocmd BufRead *.js.php set filetype=javascript
+    autocmd BufRead *.jsx set filetype=javascript
+    autocmd BufRead *.md set filetype=mkd
+    autocmd BufRead *.mkd set filetype=mkd
+    autocmd BufRead *.markdown set filetype=mkd
+    autocmd BufRead *.god set filetype=ruby
+    autocmd BufRead *.as set filetype=actionscript
+    autocmd BufRead *.sls set filetype=yaml
+    autocmd BufRead,BufNewFile *.go set filetype=go
 
-" Completion
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType javascript setlocal nocindent omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP iskeyword-=- keywordprg=pman
-autocmd FileType c setlocal omnifunc=ccomplete#Complete
-autocmd FileType java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
-autocmd Filetype gitcommit setlocal tw=68 spell
-
+    " Completion
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType javascript setlocal nocindent omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP iskeyword-=- keywordprg=pman
+    autocmd FileType c setlocal omnifunc=ccomplete#Complete
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete completefunc=javacomplete#CompleteParamsInfo
+    autocmd Filetype gitcommit setlocal tw=68 spell
+augroup END
 
 " ---------------------------------
 " OS X Stuff
