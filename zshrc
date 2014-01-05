@@ -3,7 +3,7 @@ EDITOR=vim
 
 PATH=/usr/local/bin:/usr/local/sbin:$PATH         # Machine
 PATH=/usr/local/share/python:$PATH                # Python
-PATH=/usr/local/Cellar/php/5.3.6/bin:$PATH        # PHP
+PATH="$(brew --prefix josegonzalez/php/php53)/bin:$PATH" # PHP
 PATH=$HOME/.rbenv/bin:$PATH                       # Ruby Gems
 PATH=/opt/vagrant/bin:$PATH                       # Vagrant
 PATH=/usr/local/heroku/bin:$PATH                  # Heroku
