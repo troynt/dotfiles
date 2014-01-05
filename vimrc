@@ -61,6 +61,8 @@ set statusline+=\ [%l,%c]\ %P
 set undofile
 set undoreload=10000
 
+" VCS markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " ---------------------------------
 " Completion
