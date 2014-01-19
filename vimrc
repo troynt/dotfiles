@@ -136,7 +136,7 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-q> <C-w>q
 
-noremap <leader>/ :CtrlP<CR>
+noremap <leader>p :CtrlP<CR>
 noremap <leader>f :CtrlPCurFile<CR>
 noremap <leader>b :CtrlPBuffer<CR>
  
