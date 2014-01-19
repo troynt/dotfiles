@@ -190,7 +190,7 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/]\.(git|hg|svn)|vendor$',
+    \ 'dir': '\v[\/]\.(git|hg|svn)|vendor|coverage$',
     \ 'file': '\v\.(eot|woff|svg|ttf|jpg|gif|png)$' }
 
 " ---------------------------------
