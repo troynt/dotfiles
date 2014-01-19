@@ -31,3 +31,6 @@
 [submodule "vim/bundle/yankring"]
 	path = vim/bundle/yankring
 	url = git@github.com:vim-scripts/YankRing.vim.git
+[submodule "vim/bundle/vinegar"]
+	path = vim/bundle/vinegar
+	url = git@github.com:tpope/vim-vinegar.git
