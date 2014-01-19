@@ -10,6 +10,7 @@ set encoding=utf-8
 set t_Co=256
 syntax on
 colorscheme solarized
+set background=dark
 set mouse=a
 set visualbell t_vb=
 set title
