@@ -168,6 +168,8 @@ nnoremap N Nzzzv
 " Save even if we forgot to open the file with sudo
 cmap w!! %!sudo tee > /dev/null %
 
+nnoremap <C-E> :Explore<CR>
+
 " ---------------------------------
 " Plugins
 " ---------------------------------
