@@ -32,7 +32,8 @@ function git_prompt_info {
     || ref=$(command git rev-parse --short HEAD 2> /dev/null) \
     || return
 
-    echo -n "$(git_prompt_dirty)(${ref#refs/heads/})"
+    echo -n "$(git_prompt_dirty)${ref#refs/heads/}"
 }
 
-PROMPT=$'%{$fg[cyan]%}%c$(git_prompt_info)%{$reset_color%} '
+PROMPT='\$ '
+RPROMPT=$'$(git_prompt_info)%{$reset_color%}'

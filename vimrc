@@ -9,8 +9,7 @@ filetype plugin indent on
 set encoding=utf-8
 set t_Co=256
 syntax on
-colorscheme solarized
-set background=dark
+colorscheme default
 set mouse=a
 set visualbell t_vb=
 set title
