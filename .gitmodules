@@ -34,3 +34,9 @@
 [submodule "vim/bundle/vinegar"]
 	path = vim/bundle/vinegar
 	url = git@github.com:tpope/vim-vinegar.git
+[submodule "vim/bundle/cmake"]
+    path = vim/bundle/cmake
+	url = git@github.com:jalcine/cmake.vim.git
+[submodule "vim/bundle/simplenote"]
+    path = vim/bundle/simplenote
+    url = git@github.com:mrtazz/simplenote.vim.git
