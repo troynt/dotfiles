@@ -11,11 +11,9 @@ PATH=/opt/tools/android/sdk/tools:$PATH                  # Android
 PATH=/opt/tools/android/sdk/platform-tools:$PATH         # Android
 PATH=/usr/local/go/bin:$PATH                             # Go
 PATH=$HOME/Dev/bin:$PATH                                 # My Go
-PATH=$HOME/Dev/Work/virb/scripts/tools/bin:$PATH         # Virb tools
+PATH=$HOME/Dev/Work/virb/bin:$PATH                       # Virb tools
 PATH=$HOME/.ansible/bin:$PATH                            # Ansible
 PATH=$HOME/.bin:$PATH                                    # My tools
-
-ANDROID_SDK=/opt/tools/android/sdk
 
 if [ -f $HOME/.zshrc.local ]; then
     source $HOME/.zshrc.local
