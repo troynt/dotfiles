@@ -13,9 +13,6 @@
 [submodule "vim/bundle/rename"]
 	path = vim/bundle/rename
 	url = git@github.com:danro/rename.vim.git
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
-	url = git@github.com:scrooloose/syntastic.git
 [submodule "vim/bundle/align"]
 	path = vim/bundle/align
 	url = git@github.com:tsaleh/vim-align.git
