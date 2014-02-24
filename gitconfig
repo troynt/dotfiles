@@ -1,10 +1,13 @@
 [user]
-	name = Troy Thompson
-	email = troynt@gmail.com
+  name = Troy Thompson
+  email = troynt@gmail.com
 [github]
   user = troynt
+  
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
 [core]
-	excludesfile = /Users/tthompson/.gitignore_global
   editor = vim
 [color]
   branch = auto
