@@ -3,9 +3,10 @@
 *.swo
 .DS_Store
 log/*
+conf/
 db/*.sqlite3
 mkmf.log
 *.sphinx.conf
 .project
 .vagrant
-.idea/*
+.vimrc.local

@@ -7,39 +7,48 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-[core]
   editor = vim
 [color]
-  branch = auto
-  diff = auto
-  status = auto
+    branch = auto
+    diff   = auto
+    status = auto
   ui = true
 [push]
   default = current
 [help]
-  autocorrect = 1
+    autocorrect = 1
+
+[mergetool]
+    keepBackup = true
+[diff]
+    algorithm = patience
+
+[branch]
+    autosetuprebase = always
+[push]
+    default = current
 [alias]
-  lol = log --oneline --graph --decorate
-  human = name-rev --name-only
+    ll             = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ls             = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    short          = status -s
+    stage          = add
+    unstage        = reset HEAD
+    staged         = diff --cached
+    unstaged       = diff
+    stat           = diff --stat -r
+    undo           = reset --soft HEAD^
+    track          = checkout -t
+    prep           = rebase -i @{upstream}
+
+    human          = name-rev --name-only
+    ours           = '!f() { git checkout --ours $@ && git add $@; }; f'
+    theirs         = '!f() { git checkout --theirs $@ && git add $@; }; f'
+    conflicts      = "!f() { git ls-files -u | awk '{print $4}' | sort -u; }; f"
+    edit-conflicts = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; $EDITOR `f`"
+    prune-remote   = !git remote | xargs -n 1 git remote prune
+    new-commits    = !sh -c 'git log $1@{1}..$1@{0} "$@"'
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	work = config user.email \"troy@omniata.com\"
-
-[url "troynt@git.drupal.org:project/"]
-  insteadOf = "dh:"
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
-[url "git://github.com/"]
-  insteadOf = "github:"
-[url "git@gist.github.com:"]
-  insteadOf = "gst:"
-  pushInsteadOf = "gist:"
-  pushInsteadOf = "git://gist.github.com/"
-[url "git://gist.github.com/"]
-  insteadOf = "gist:"
-[url "git@heroku.com:"]
-  insteadOf = "heroku:"
 [merge]
   tool = "meld"
 [pull]

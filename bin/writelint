@@ -1,0 +1,25 @@
+#!/bin/bash
+
+WRITING=$HOME/.writing
+
+main() {
+	if [ "$1" = "" ]; then
+		echo "usage: `basename $0` <file> ..."
+		exit
+	fi
+
+    local GREEN='\e[0;32m'
+	local LIST=''
+
+	echo "Passive Voice:"
+	LIST=$(cat $WRITING/passive | paste -s -d "|")
+	egrep -n -i --color "\\b(am|are|were|being|is|been|was|be) \\b[ ]*(\w+ed|($LIST))\\b" $* || echo -e "${GREEN}OK"
+	echo
+
+	echo "Unnecessary Adjectives:"
+	LIST=$(cat $WRITING/adjectives | paste -s -d "|")
+	egrep -i -n --color "\\b($LIST)\\b" $* || echo -e "${GREEN}OK"
+	echo
+}
+
+main "$@"
